@@ -1,0 +1,81 @@
+<html>
+
+<body>
+    <app-header></app-header>
+    <nz-layout class="layout">
+        <nz-content>
+            <h1 class="title" >Register form</h1>
+            <form nz-form [formGroup]="validateForm">
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" nzRequired nzTooltipTitle="must have to be unic !">
+                        <span>Username</span>
+                    </nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Pleaser enter username!">
+                        <input nz-input id="username" formControlName="username" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="firstname" nzRequired>
+                        <span>First name</span>
+                    </nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter your first name!">
+                        <input nz-input id="firstname" formControlName="firstname" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastname" nzRequired>
+                        <span>Last name</span>
+                    </nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter your last name!">
+                        <input nz-input id="lastname" formControlName="lastname" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Invalide email!">
+                        <input nz-input formControlName="email" id="email" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+                        <input nz-input type="password" id="password" formControlName="password"
+                            (ngModelChange)="updateConfirmValidator()" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Password verify
+                    </nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+                        <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+                        <ng-template #errorTpl let-control>
+                            <ng-container *ngIf="control.hasError('required')">Confirm password !
+                            </ng-container>
+                            <ng-container *ngIf="control.hasError('confirm')">
+                                Passwords are not the same !
+                            </ng-container>
+                        </ng-template>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone number</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phone']"
+                        nzErrorTip="Please input your phone number!">
+
+                        <input formControlName="phone" id="'phone'" nz-input />
+
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-row class="register-area">
+                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                        <button nz-button nzType="primary" type="submit" (click)="register()" nzShape="round">Register
+                            now</button>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </nz-content>
+        <app-footer></app-footer>
+    </nz-layout>
+</body>
+
+</html>

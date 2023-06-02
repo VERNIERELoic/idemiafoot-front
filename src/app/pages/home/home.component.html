@@ -1,0 +1,24 @@
+<html>
+
+<body>
+  <app-header></app-header>
+  <nz-layout class="layout">
+    <nz-content>
+      <div nz-row nzAlign="top">
+        <div nz-col nzSpan="12"><img id="mainlogo" src="../../../assets/footlogo.png"></div>
+        <div class="main-txt" nz-col nzSpan="8">
+          <h1>IDEMIA Football</h1>
+          <p>Booking platform and team generator</p>
+          <button  [routerLink]="['/events']" routerLinkActive="router-link-active" nz-button nzShape="round" nzType="primary">Search match now !</button>
+        </div>
+      </div>
+      <div nz-row nzJustify="center" [nzGutter]="8">
+        <div nz-col [nzSpan]="5">
+        </div>
+      </div>
+    </nz-content>
+    <app-footer></app-footer>
+  </nz-layout>
+</body>
+
+</html>

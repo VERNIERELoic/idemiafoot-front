@@ -1,0 +1,72 @@
+.layout {
+  min-height: 100vh;
+}
+
+nz-content {
+  padding: 0 50px;
+  margin-top: 10%;
+}
+
+#mainlogo{
+  margin-left: 40%;
+  width: 300px;
+  height: auto;
+}
+
+.main-txt {
+  font-size: x-large;
+  margin-top: 3%;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  background: transparent;
+  padding: 24px;
+  min-height: 380px;
+}
+
+nz-card{
+  border-radius: 8px;
+  width: 300px;
+}
+
+.cards{
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.simple {
+  text-align: center;
+  background-color: transparent;
+}
+
+.secured {
+  text-align: center;
+  background-color: transparent;
+}
+
+.fast {
+  text-align: center;
+  background-color: transparent;
+}
+
+
+.simple img{
+  width: 200px;
+  height: auto;
+}
+
+.secured img{
+  width: 200px;
+  height: auto;
+}
+
+.fast img {
+  width: 250px;
+  height: auto;
+}

@@ -1,0 +1,51 @@
+.layout {
+    min-height: 100vh;
+}
+
+nz-content {
+    padding: 0 50px;
+    margin-top: 3%;
+}
+
+nz-form-control {
+    margin-bottom: 20px;
+    max-width: 30%;
+}
+
+nz-table {
+    margin-top: 0%;
+}
+
+.list {
+    width: 150%;
+}
+
+.action {
+    font-size: x-large;
+    margin-top: 3%;
+}
+
+.btn_action button {
+    margin-right: 10px;
+}
+
+.data {
+    font-size: x-large;
+    margin-top: 10%;
+}
+
+.nz-form-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-player button{
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: space-between;
+}
+
+
+.modalJoin button {
+    margin-left: 10px;
+}

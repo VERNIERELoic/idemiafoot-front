@@ -1,0 +1,36 @@
+<html>
+<body>
+  <app-header></app-header>
+  <nz-layout class="layout">
+    <nz-content>
+      <form nz-form [formGroup]="validateForm" class="login-form">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Invalid username !">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input formControlName="username" placeholder="username" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Enter password !">
+            <nz-input-group nzPrefixIcon="lock">
+              <input type="password" nz-input formControlName="password" placeholder="Password" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-row class="login-form-margin">
+          <div nz-col [nzSpan]="12">
+            <a class="login-form-forgot">Recover password</a>
+          </div>
+        </div>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="login()"
+          nzShape="round">Login</button>
+        Or
+        <a routerLink="/register">Register</a>
+      </form>
+    </nz-content>
+    <app-footer></app-footer>
+  </nz-layout>
+</body>
+
+</html>

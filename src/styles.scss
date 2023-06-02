@@ -1,0 +1,19 @@
+@use 'themes' as *;
+
+@use '@nebular/theme/styles/globals' as *;
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+.cursor-pointer {
+    cursor: pointer;
+}
+
+@font-face {
+    font-family: "inter-regular";
+    src: url(assets/fonts/Inter-Regular.ttf);
+}
+
+* {
+    font-family: "inter-regular";
+  }
