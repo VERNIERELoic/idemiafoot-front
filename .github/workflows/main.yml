@@ -1,0 +1,24 @@
+name: CI
+
+on: 
+  push:
+    branches : [main]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 8.15.1
+      uses: actions/setup-node@v1
+      with:
+        node-version: 18
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v2
+      env:
+        ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BASE_BRANCH: main
+        BRANCH: main
+        FOLDER: dist/idemiafoot-front
+        BUILD_SCRIPT: npm install && npm run build -- --prod && cp dist/idemiafoot-front/index.html dist/idemiafoot-front/404.html
