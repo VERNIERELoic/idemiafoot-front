@@ -23,7 +23,7 @@ jobs:
     - name: Build
       run: npm run build:prod
 
-    - name: Deploy
+    - name: Deploy 
       if: success()
       uses: peaceiris/actions-gh-pages@v3
       with:
