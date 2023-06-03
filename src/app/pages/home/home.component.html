@@ -1,19 +1,26 @@
 <html>
 
 <body>
-  <app-header></app-header>
   <nz-layout class="layout">
+    <nz-header>
+      <app-header></app-header>
+    </nz-header>
     <nz-content>
-      <div nz-row nzAlign="top">
-        <div nz-col nzSpan="12"><img id="mainlogo" src="../../../assets/footlogo.png"></div>
-        <div class="main-txt" nz-col nzSpan="8">
-          <h1>IDEMIA Football</h1>
-          <p>Booking platform and team generator</p>
-          <button  [routerLink]="['/events']" routerLinkActive="router-link-active" nz-button nzShape="round" nzType="primary">Search match now !</button>
+      <nz-divider nzOrientation="left" nzText=''></nz-divider>
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div nz-col class="gutter-row" [nzSpan]="6">
+          <div class="inner-box"></div>
         </div>
-      </div>
-      <div nz-row nzJustify="center" [nzGutter]="8">
-        <div nz-col [nzSpan]="5">
+        <div nz-col class="gutter-row" [nzSpan]="24">
+          <div class="inner-box">
+            <h1>IDEMIA Football</h1><br>
+            <p>Booking platform and team generator</p>
+            <button [routerLink]="['/events']" routerLinkActive="router-link-active" nz-button nzShape="round"
+              nzType="primary">Search match now !</button>
+          </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSpan]="6">
+          <div class="inner-box"></div>
         </div>
       </div>
     </nz-content>
