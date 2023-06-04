@@ -56,11 +56,19 @@
                                 <td>{{ item.date|date:"medium" }}</td>
                                 <td>{{ item.sport }}</td>
                                 <td>
-                                    <nz-divider nzType="vertical"></nz-divider>
-                                    <button nz-button nzType="primary" (click)="onPlayers(item.id)"
-                                        [disabled]="item.isPast" (click)="showModalMiddleManageTeams()"><span nz-icon
-                                            nzType="vertical-align-bottom" nzTheme="outline"></span>Join event</button>
-
+                                    <div class="btn_tab">
+                                        <button nz-button nzType="primary" (click)="onPlayers(item.id)"
+                                            [disabled]="item.isPast" (click)="showModalMiddleManageTeams()"><span
+                                                nz-icon nzType="vertical-align-bottom" nzTheme="outline"></span>Join
+                                            event</button>
+                                        <!-- <nz-divider nzType="vertical"></nz-divider> -->
+                                        <button nz-button nzType="primary" nzDanger nz-popconfirm
+                                            nzPopconfirmTitle="Are you sure delete this event ?"
+                                            nzPopconfirmPlacement="bottom" (nzOnConfirm)="confirmDelete(item.id)"
+                                            (nzOnCancel)="cancelDelete()" [disabled]="item.isPast">
+                                            Delete <span nz-icon nzType="delete" nzTheme="outline"></span>
+                                        </button>
+                                    </div>
                                     <nz-modal class="modalJoin" [(nzVisible)]="isVisibleJoin" nzTitle="Match" nzCentered
                                         (nzOnCancel)="handleCancelMiddleManageTeams()"
                                         (nzOnOk)="handleOkMiddleManageTeams()">
@@ -101,12 +109,6 @@
                     </form>
                     </ng-container>
                     </nz-modal>
-                    <nz-divider nzType="vertical"></nz-divider>
-                    <button nz-button nzType="primary" nzDanger nz-popconfirm
-                        nzPopconfirmTitle="Are you sure delete this event ?" nzPopconfirmPlacement="bottom"
-                        (nzOnConfirm)="confirmDelete(item.id)" (nzOnCancel)="cancelDelete()" [disabled]="item.isPast">
-                        Delete <span nz-icon nzType="delete" nzTheme="outline"></span>
-                    </button>
                     </td>
                     </tr>
                     </tbody>
