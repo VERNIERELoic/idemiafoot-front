@@ -57,7 +57,7 @@
                                 <td>{{ item.sport }}</td>
                                 <td>
                                     <div class="btn_tab">
-                                        <button nz-button nzType="primary" (click)="onPlayers(item.id)"
+                                        <button nz-button nzType="primary" (click)="onPlayers(item.id); checkTimetoConfirm(item.date)"
                                             [disabled]="item.isPast" (click)="showModalMiddleManageTeams()"><span
                                                 nz-icon nzType="vertical-align-bottom" nzTheme="outline"></span>Join
                                             event</button>
@@ -88,7 +88,7 @@
                             <tr *ngFor="let item of players; let i = index">
                                 <td>{{ position + i }}</td>
                                 <td>{{item.username}}</td>
-                                <td>{{item.confirmed}}</td>
+                                <td [ngStyle]="{'color': item.confirmed ? 'green' : 'red'}">{{item.confirmed}}</td>
                             </tr>
                         </tbody>
                     </nz-table>
@@ -98,12 +98,16 @@
                         </button>
                         <button nz-button nzType="primary" nzDanger nz-popconfirm
                             nzPopconfirmTitle="Are you sure to leave this match ?" nzPopconfirmPlacement="bottom"
-                            (nzOnConfirm)="deleteUserFromEvent()" (nzOnCancel)="cancelDelete()">
+                            (nzOnConfirm)="deletePlayerFromEvent()" (nzOnCancel)="cancelDelete()">
                             <span nz-icon nzType="user-delete" nzTheme="outline"></span>
                             Leave</button>
+                        <button nz-button nzType="primary" [disabled]="isTimeToConfirm" (click)="confirmPlayer(selectedEventId)">
+                            <span nz-icon nzType="check" nzTheme="outline"></span>confirm
+                        </button>
                         <button nz-button nzType="primary" (click)="onPlayers(selectedEventId)">
                             <span nz-icon nzType="reload" nzTheme="outline"></span>
                         </button>
+
                     </div>
                     </nz-form-item>
                     </form>

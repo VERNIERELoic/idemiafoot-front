@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { firstValueFrom, interval, Subscription } from 'rxjs';
+import { firstValueFrom, interval, Subscription, timer } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
@@ -24,7 +24,7 @@ export class EventsComponent {
   currentUser: any;
   selectedEventId: number | undefined;
   position: number = 1;
-
+  isTimeToConfirm: boolean = true;
 
 
   constructor(private nzMessageService: NzMessageService,
@@ -40,12 +40,13 @@ export class EventsComponent {
     }))
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.validateForm = this.fb.group({
       date: [null, [Validators.required]],
       sport: [null, [Validators.required]],
     });
     this.onEvents();
+    this.currentUser = await firstValueFrom(this.authService.current())
   }
 
   onEvents() {
@@ -60,6 +61,7 @@ export class EventsComponent {
         itemDate.setHours(0, 0, 0, 0);
 
         item.isPast = itemDate < today;
+
         return item;
       });
 
@@ -74,7 +76,7 @@ export class EventsComponent {
 
   onPlayers(eventId: any) {
     this.selectedEventId = eventId;
-    this.eventsService.getEventPlayers(eventId).subscribe(((res: any) => {
+    this.eventsService.getUserEventPlayers(eventId).subscribe(((res: any) => {
       this.players = res;
     }))
   }
@@ -90,9 +92,8 @@ export class EventsComponent {
       });
   }
 
+
   async addPlayerToEvent(eventId: any) {
-    this.currentUser = await firstValueFrom(this.authService.current())
-    console.log(eventId);
     await firstValueFrom(this.eventsService.addPlayerToEvent(eventId, this.currentUser.id))
       .then(() => {
         this.notificationService.success("Succes", "You have been added to the event");
@@ -104,10 +105,8 @@ export class EventsComponent {
   }
 
 
-  async deleteUserFromEvent() {
+  async deletePlayerFromEvent() {
     this.showModalMiddleManageTeams();
-    this.currentUser = await firstValueFrom(this.authService.current())
-    console.log(this.selectedEventId);
     await firstValueFrom(this.eventsService.deleteUserFromEvent(this.selectedEventId, this.currentUser.id))
       .then(() => {
         this.notificationService.success("Succes", "You have been deleted from event");
@@ -162,6 +161,37 @@ export class EventsComponent {
       }
     });
   }
+
+  async confirmPlayer(eventId: any) {
+    await firstValueFrom(this.eventsService.confirmUser(eventId, this.currentUser.id))
+      .then(() => {
+        this.notificationService.success("Succes", "You have been confirmed to on this event");
+        this.onPlayers(eventId);
+      }).catch((error) => {
+        console.error(error);
+        this.notificationService.error("Error", error.message);
+      });
+  }
+
+  checkTimetoConfirm(date: Date): void {
+    console.log(date);
+    let dateType = new Date(date);
+    // Calculate the time until 4 hours before the event.
+    const timeUntilEvent = dateType.getTime() - new Date().getTime() - 4 * 60 * 60 * 1000;
+
+    if (timeUntilEvent > 0) {
+      // If the event is in the future, set up a timer.
+      const source = timer(timeUntilEvent);
+      source.subscribe(() => {
+        // This code will run 4 hours before the event.
+        this.isTimeToConfirm = false;
+      });
+    } else {
+      // If the event is in the past or less than 4 hours in the future, set isTimeToConfirm to false.
+      this.isTimeToConfirm = false;
+    }
+  }
+
 
 }
 
