@@ -25,6 +25,7 @@ export class EventsComponent {
   selectedEventId: number | undefined;
   position: number = 1;
   isTimeToConfirm: boolean = true;
+  event: any;
 
 
   constructor(private nzMessageService: NzMessageService,
@@ -79,6 +80,11 @@ export class EventsComponent {
     this.eventsService.getUserEventPlayers(eventId).subscribe(((res: any) => {
       this.players = res;
     }))
+    this.eventsService.getEvent(eventId).subscribe(((res: any) => {
+      this.event = res;
+      this.checkTimetoConfirm(this.event.date);
+    }))
+
   }
 
   async submitForm() {
@@ -174,20 +180,16 @@ export class EventsComponent {
   }
 
   checkTimetoConfirm(date: Date): void {
-    console.log(date);
+    this.isTimeToConfirm = true;
     let dateType = new Date(date);
-    // Calculate the time until 4 hours before the event.
     const timeUntilEvent = dateType.getTime() - new Date().getTime() - 4 * 60 * 60 * 1000;
 
     if (timeUntilEvent > 0) {
-      // If the event is in the future, set up a timer.
       const source = timer(timeUntilEvent);
       source.subscribe(() => {
-        // This code will run 4 hours before the event.
         this.isTimeToConfirm = false;
       });
     } else {
-      // If the event is in the past or less than 4 hours in the future, set isTimeToConfirm to false.
       this.isTimeToConfirm = false;
     }
   }
