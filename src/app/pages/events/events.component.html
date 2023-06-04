@@ -1,11 +1,17 @@
 <html>
 
 <body>
-    <app-header></app-header>
     <nz-layout class="layout">
+        <app-header></app-header>
         <nz-content>
-            <div class="action" nz-row>
-                <div nz-col nzSpan="8">
+
+
+            <nz-divider nzOrientation="left" nzText=''></nz-divider>
+            <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+                <div nz-col class="gutter-row" [nzSpan]="6">
+                    <div class="inner-box"></div>
+                </div>
+                <div nz-col class="gutter-row" [nzSpan]="24">
                     <div class="btn_action">
                         <button nz-button nzType="primary" (click)="showModalMiddleCreateEvent()"><span nz-icon
                                 nzType="plus" nzTheme="outline"></span>Add event</button>
@@ -35,80 +41,84 @@
                         <button nz-button nzType="primary" (click)="refresh()"><span nz-icon nzType="reload"
                                 nzTheme="outline"></span></button>
                     </div>
-                </div>
-            </div>
-            <div class="data" nz-row nzJustify="center" [nzGutter]="8">
-                <nz-table #basicTable [nzData]="events">
-                    <thead>
-                        <tr>
-                            <th><span nz-icon nzType="number" nzTheme="outline"></span></th>
-                            <th>Date time</th>
-                            <th>Sport</th>
-                            <th>Manage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of events" [ngClass]="{'past-event': item.isPast}">
-                            <td>{{ item.id }}</td>
-                            <td>{{ item.date|date:"medium" }}</td>
-                            <td>{{ item.sport }}</td>
-                            <td>
-                                <nz-divider nzType="vertical"></nz-divider>
-                                <button nz-button nzType="primary" (click)="onPlayers(item.id)" [disabled]="item.isPast"
-                                    (click)="showModalMiddleManageTeams()"><span nz-icon nzType="vertical-align-bottom"
-                                        nzTheme="outline"></span>Join event</button>
-
-                                <nz-modal class="modalJoin" [(nzVisible)]="isVisibleJoin" nzTitle="Match" nzCentered
-                                    (nzOnCancel)="handleCancelMiddleManageTeams()"
-                                    (nzOnOk)="handleOkMiddleManageTeams()">
-                                    <ng-container *nzModalContent>
-                                        <form nz-form>
-                                            <nz-form-item class="flex-container">
-                                                <nz-table class="flex-item" #basicTable [nzData]="players"
-                                                    [nzPageIndex]="3" [nzScroll]="{ y: '250px' }">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Positions</th>
-                                                            <th>Players</th>
-                                                            <th>Confirmed status</th>
-                                                        </tr>
-                                                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of players; let i = index">
-                            <td>{{ position + i }}</td>
-                            <td>{{item.username}}</td>
-                            <td>{{item.confirmed}}</td>
-                        </tr>
+                    <nz-table #basicTable [nzData]="events">
+                        <thead>
+                            <tr>
+                                <th><span nz-icon nzType="number" nzTheme="outline"></span></th>
+                                <th>Date time</th>
+                                <th>Sport</th>
+                                <th>Manage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of events" [ngClass]="{'past-event': item.isPast}">
+                                <td>{{ item.id }}</td>
+                                <td>{{ item.date|date:"medium" }}</td>
+                                <td>{{ item.sport }}</td>
+                                <td>
+                                    <div class="btn_tab">
+                                        <button nz-button nzType="primary" (click)="onPlayers(item.id)"
+                                            [disabled]="item.isPast" (click)="showModalMiddleManageTeams()"><span
+                                                nz-icon nzType="vertical-align-bottom" nzTheme="outline"></span>Join
+                                            event</button>
+                                        <!-- <nz-divider nzType="vertical"></nz-divider> -->
+                                        <button nz-button nzType="primary" nzDanger nz-popconfirm
+                                            nzPopconfirmTitle="Are you sure delete this event ?"
+                                            nzPopconfirmPlacement="bottom" (nzOnConfirm)="confirmDelete(item.id)"
+                                            (nzOnCancel)="cancelDelete()" [disabled]="item.isPast">
+                                            Delete <span nz-icon nzType="delete" nzTheme="outline"></span>
+                                        </button>
+                                    </div>
+                                    <nz-modal class="modalJoin" [(nzVisible)]="isVisibleJoin" nzTitle="Match" nzCentered
+                                        (nzOnCancel)="handleCancelMiddleManageTeams()"
+                                        (nzOnOk)="handleOkMiddleManageTeams()">
+                                        <ng-container *nzModalContent>
+                                            <form nz-form>
+                                                <nz-form-item class="flex-container">
+                                                    <nz-table class="flex-item" #basicTable [nzData]="players"
+                                                        [nzPageIndex]="3" [nzScroll]="{ y: '250px' }">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Positions</th>
+                                                                <th>Players</th>
+                                                                <th>Confirmed status</th>
+                                                            </tr>
+                                                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of players; let i = index">
+                                <td>{{ position + i }}</td>
+                                <td>{{item.username}}</td>
+                                <td>{{item.confirmed}}</td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                    <div class="btn-player">
+                        <button nz-button nzType="primary" (click)="addPlayerToEvent(selectedEventId)">
+                            <span nz-icon nzType="vertical-align-bottom" nzTheme="outline"></span>Join
+                        </button>
+                        <button nz-button nzType="primary" nzDanger nz-popconfirm
+                            nzPopconfirmTitle="Are you sure to leave this match ?" nzPopconfirmPlacement="bottom"
+                            (nzOnConfirm)="deleteUserFromEvent()" (nzOnCancel)="cancelDelete()">
+                            <span nz-icon nzType="user-delete" nzTheme="outline"></span>
+                            Leave</button>
+                        <button nz-button nzType="primary" (click)="onPlayers(selectedEventId)">
+                            <span nz-icon nzType="reload" nzTheme="outline"></span>
+                        </button>
+                    </div>
+                    </nz-form-item>
+                    </form>
+                    </ng-container>
+                    </nz-modal>
+                    </td>
+                    </tr>
                     </tbody>
-                </nz-table>
-                <div class="btn-player">
-                    <button nz-button nzType="primary" (click)="addPlayerToEvent(selectedEventId)">
-                        <span nz-icon nzType="vertical-align-bottom" nzTheme="outline"></span>Join
-                    </button>
-                    <button nz-button nzType="primary" nzDanger nz-popconfirm
-                        nzPopconfirmTitle="Are you sure to leave this match ?" nzPopconfirmPlacement="bottom"
-                        (nzOnConfirm)="deleteUserFromEvent()" (nzOnCancel)="cancelDelete()">
-                        <span nz-icon nzType="user-delete" nzTheme="outline"></span>
-                        Leave</button>
-                    <button nz-button nzType="primary" (click)="onPlayers(selectedEventId)">
-                        <span nz-icon nzType="reload" nzTheme="outline"></span>
-                    </button>
+                    </nz-table>
                 </div>
-                </nz-form-item>
-                </form>
-                </ng-container>
-                </nz-modal>
-                <nz-divider nzType="vertical"></nz-divider>
-                <button nz-button nzType="primary" nzDanger nz-popconfirm
-                    nzPopconfirmTitle="Are you sure delete this event ?" nzPopconfirmPlacement="bottom"
-                    (nzOnConfirm)="confirmDelete(item.id)" (nzOnCancel)="cancelDelete()" [disabled]="item.isPast">
-                    Delete <span nz-icon nzType="delete" nzTheme="outline"></span>
-                </button>
-                </td>
-                </tr>
-                </tbody>
-                </nz-table>
             </div>
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box"></div>
+            </div>
+
         </nz-content>
         <app-footer></app-footer>
     </nz-layout>

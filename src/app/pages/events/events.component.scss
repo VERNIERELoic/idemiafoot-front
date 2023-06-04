@@ -1,10 +1,20 @@
+:host {
+    text-align: center;
+}
+
 .layout {
     min-height: 100vh;
 }
 
+.inner-box {
+    background: transparent;
+    padding: 20px 0;
+}
+
 nz-content {
-    padding: 0 50px;
-    margin-top: 3%;
+    padding: 0 30px;
+    margin-top: 64px;
+    font-size: large;
 }
 
 nz-form-control {
@@ -12,26 +22,14 @@ nz-form-control {
     max-width: 30%;
 }
 
-nz-table {
-    margin-top: 0%;
-}
-
-.list {
-    width: 150%;
-}
-
-.action {
-    font-size: x-large;
-    margin-top: 3%;
-}
-
 .btn_action button {
-    margin-right: 10px;
+    margin: 0 10px 10px 0;
+    float: left;
 }
 
-.data {
-    font-size: x-large;
-    margin-top: 10%;
+.btn_tab button {
+    width: 120px;
+    margin: 5px;
 }
 
 .nz-form-item {
@@ -39,13 +37,15 @@ nz-table {
     justify-content: space-between;
 }
 
-.btn-player button{
-    margin-left: 10px;
-    margin-right: 10px;
+.btn-player button {
+    margin: 10px 10px 10px 0;
     justify-content: space-between;
 }
 
-
 .modalJoin button {
     margin-left: 10px;
+}
+
+nz-footer {
+    text-align: center;
 }

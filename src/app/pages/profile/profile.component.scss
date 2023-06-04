@@ -19,35 +19,26 @@
     margin-bottom: 8px;
 }
 
-form {
-    padding-top: 5%;
-    margin: 0 auto;
+:host {
+    text-align: center;
 }
 
 .layout {
     min-height: 100vh;
 }
 
+button{
+    margin: 10px;
+}
+
 nz-content {
     padding: 0 50px;
-    margin-top: 10%;
+    margin-top: 64px;
+    font-size: large;
 }
 
-nz-breadcrumb {
-    margin: 16px 0;
-}
-
-.inner-content {
-    background: transparent;
-    padding: 24px;
-    min-height: 380px;
-}
-
-:host ::ng-deep .avatar-uploader>.ant-upload {
-    width: 128px;
-    height: 128px;
-}
-
-button {
-    margin: 2%;
+form {
+    padding-top: 1%;
+    margin: 0 auto;
+    font-size: large;
 }
