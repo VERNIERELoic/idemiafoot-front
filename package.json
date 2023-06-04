@@ -23,6 +23,7 @@
     "@nebular/eva-icons": "11.0.0",
     "@nebular/theme": "^11.0.0",
     "eva-icons": "^1.1.3",
+    "moment-timezone": "^0.5.43",
     "ng-zorro-antd": "^15.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

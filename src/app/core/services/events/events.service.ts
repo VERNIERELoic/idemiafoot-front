@@ -32,8 +32,17 @@ export class EventsService {
     return this.http.post(`${environment.apiUrl}/user-event/deleteUserFromEvent`, body);
   }
 
-  getEventPlayers(id: any): any {
-    return this.http.get(`${environment.apiUrl}/user-event/getUsersByEventId/${id}`);
+  // getEventPlayers(id: any): any {
+  //   return this.http.get(`${environment.apiUrl}/user-event/getUsersByEventId/${id}`);
+  // }
+
+  getUserEventPlayers(id: any): any {
+    return this.http.get(`${environment.apiUrl}/user-event/getUserEventsByEventId/${id}`);
   }
 
+  confirmUser(eventId: any, userId: any): any {
+    const body = { userId, eventId };
+    return this.http.post(`${environment.apiUrl}/user-event/confirmUser`, body);
+  }
+  
 }
