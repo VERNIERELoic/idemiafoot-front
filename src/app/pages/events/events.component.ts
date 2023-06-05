@@ -171,7 +171,7 @@ export class EventsComponent {
   async confirmPlayer(eventId: any) {
     await firstValueFrom(this.eventsService.confirmUser(eventId, this.currentUser.id))
       .then(() => {
-        this.notificationService.success("Succes", "You have been confirmed to on this event");
+        this.notificationService.success("Succes", "Your spot has been confirmed for this event");
         this.onPlayers(eventId);
       }).catch((error) => {
         console.error(error);
