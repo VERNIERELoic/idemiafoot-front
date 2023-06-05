@@ -4,8 +4,6 @@
     <nz-layout class="layout">
         <app-header></app-header>
         <nz-content>
-
-
             <nz-divider nzOrientation="left" nzText=''></nz-divider>
             <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
                 <div nz-col class="gutter-row" [nzSpan]="6">
@@ -57,7 +55,7 @@
                                 <td>{{ item.sport }}</td>
                                 <td>
                                     <div class="btn_tab">
-                                        <button nz-button nzType="primary" (click)="onPlayers(item.id); checkTimetoConfirm(item.date)"
+                                        <button nz-button nzType="primary" (click)="onPlayers(item.id)"
                                             [disabled]="item.isPast" (click)="showModalMiddleManageTeams()"><span
                                                 nz-icon nzType="vertical-align-bottom" nzTheme="outline"></span>Join
                                             event</button>
@@ -81,7 +79,7 @@
                                                             <tr>
                                                                 <th>Positions</th>
                                                                 <th>Players</th>
-                                                                <th>Confirmed status</th>
+                                                                <th>Confirmed</th>
                                                             </tr>
                                                         </thead>
                         <tbody>

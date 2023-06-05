@@ -22,6 +22,10 @@ export class EventsService {
     return this.http.delete(`${environment.apiUrl}/events/remove/${id}`);
   }
 
+  getEvent(id: any): any {
+    return this.http.get(`${environment.apiUrl}/events/getEvent/${id}`);
+  }
+
   addPlayerToEvent(eventId: any, userId: any): any {
     const body = { userId, eventId };
     return this.http.post(`${environment.apiUrl}/user-event/addUserToEvent`, body);
