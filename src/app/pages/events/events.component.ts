@@ -27,6 +27,9 @@ export class EventsComponent {
   isTimeToConfirm: boolean = true;
   event: any;
 
+  tabs = ['Team 1', 'Team 2'];
+  selectedIndex = 0;
+
 
   constructor(private nzMessageService: NzMessageService,
     private fb: UntypedFormBuilder,
@@ -195,5 +198,13 @@ export class EventsComponent {
   }
 
 
+  closeTab({ index }: { index: number }): void {
+    this.tabs.splice(index, 1);
+  }
+
+  newTab(): void {
+    this.tabs.push('Team ' + this.tabs.length);
+    this.selectedIndex = this.tabs.length;
+  }
 }
 

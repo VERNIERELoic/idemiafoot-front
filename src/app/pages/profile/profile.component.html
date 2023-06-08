@@ -30,7 +30,7 @@
                                     <span>Username</span>
                                 </nz-form-label>
                                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Pleaser enter username!">
-                                    <input nz-input id="username" formControlName="username" />
+                                    <input nz-input formControlName="username" id="username" [(ngModel)]="currentUser.username" />
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item>
@@ -38,7 +38,7 @@
                                     <span>First name</span>
                                 </nz-form-label>
                                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter your first name!">
-                                    <input nz-input id="firstname" formControlName="firstname" />
+                                    <input nz-input id="firstname" formControlName="firstname" [(ngModel)]="currentUser.firstname"/>
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item>
@@ -46,13 +46,13 @@
                                     <span>Last name</span>
                                 </nz-form-label>
                                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter your last name!">
-                                    <input nz-input id="lastname" formControlName="lastname" />
+                                    <input nz-input id="lastname" formControlName="lastname" [(ngModel)]="currentUser.lastname" />
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item>
                                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
                                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Invalide email!">
-                                    <input nz-input formControlName="email" id="email" />
+                                    <input nz-input formControlName="email" id="email" [(ngModel)]="currentUser.email" />
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item>
@@ -60,7 +60,7 @@
                                     nzRequired>Password</nz-form-label>
                                 <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
                                     <input nz-input type="password" id="password" formControlName="password"
-                                        (ngModelChange)="updateConfirmValidator()" />
+                                        (ngModelChange)="updateConfirmValidator()"/>
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item>
@@ -85,13 +85,13 @@
                                     [nzValidateStatus]="validateForm.controls['phone']"
                                     nzErrorTip="Please input your phone number!">
 
-                                    <input formControlName="phone" id="'phone'" nz-input />
+                                    <input formControlName="phone" id="'phone'" nz-input [(ngModel)]="currentUser.phone"/>
 
                                 </nz-form-control>
                             </nz-form-item>
                             <nz-form-item nz-row class="register-area">
                                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                                    <button nz-button nzType="primary" (click)="showConfirm()"
+                                    <button nz-button nzType="primary" (click)="update()"
                                         nzShape="round">Update</button>
                                     <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm()" nzDanger
                                         nzShape="round"><span nz-icon nzType="delete" nzTheme="outline"></span>Delete my

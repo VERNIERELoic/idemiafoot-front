@@ -99,16 +99,19 @@
                             (nzOnConfirm)="deletePlayerFromEvent()" (nzOnCancel)="cancelDelete()">
                             <span nz-icon nzType="user-delete" nzTheme="outline"></span>
                             Leave</button>
-                        <button nz-button nzType="primary" [disabled]="isTimeToConfirm" (click)="confirmPlayer(selectedEventId)">
+                        <button nz-button nzType="primary" [disabled]="isTimeToConfirm"
+                            (click)="confirmPlayer(selectedEventId)">
                             <span nz-icon nzType="check" nzTheme="outline"></span>confirm
                         </button>
                         <button nz-button nzType="primary" (click)="onPlayers(selectedEventId)">
                             <span nz-icon nzType="reload" nzTheme="outline"></span>
                         </button>
-
                     </div>
                     </nz-form-item>
                     </form>
+                    <nz-tabset [(nzSelectedIndex)]="selectedIndex" nzType="editable-card" (nzAdd)="newTab()" (nzClose)="closeTab($event)">
+                        <nz-tab *ngFor="let tab of tabs" nzClosable [nzTitle]="tab">Content of {{ tab }}</nz-tab>
+                    </nz-tabset>
                     </ng-container>
                     </nz-modal>
                     </td>
