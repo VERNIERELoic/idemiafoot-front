@@ -109,10 +109,10 @@
                         </button>
                         <nz-tag [nzColor]="'purple'">Teams management</nz-tag>
                         <nz-tabset [(nzSelectedIndex)]="selectedIndex" nzType="editable-card" (nzAdd)="createTeam()"
-                            (nzClose)="deleteTeam($event)">
+                            (nzClose)="deleteTeam($event)" (nzSelectChange)="onTeamPlayers($event)">
                             <nz-tab *ngFor="let team of teams; index as i" nzClosable [nzTitle]="'team ' + (i + 1)">
                                 <nz-select [nzMaxTagCount]="6" nzMode="multiple" nzPlaceHolder="Please select players"
-                                    [(ngModel)]="tabs[i]" [name]="'team' + i"
+                                    [(ngModel)]="teamPlayers" [name]="'team' + i"
                                     (ngModelChange)="addPLayerToTeam($event, i)">
                                     <nz-option *ngFor="let player of players" [nzLabel]="player.username"
                                         [nzValue]="player"></nz-option>

@@ -63,9 +63,13 @@ export class EventsService {
     return this.http.get(`${environment.apiUrl}/teams/getTeamsByEvent/${eventId}`);
   }
 
-  addPlayerToTeam(teamId: any, userId: any): any {
-    const body = { userId, teamId};
-    return this.http.post(`${environment.apiUrl}/user-team/addUserToTeam`, body);
+  addPlayerToTeam(userId: any, teamId: any): any {
+    const body = { userId, teamId };
+    return this.http.post(`${environment.apiUrl}/teams/addUserToTeam`, body);
   }
 
+  getUsersByTeam(teamId: any): any {
+    const body = { teamId };
+    return this.http.post(`${environment.apiUrl}/teams/getUsersByTeam`, body);
+  }
 }
