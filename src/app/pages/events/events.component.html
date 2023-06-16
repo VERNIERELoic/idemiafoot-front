@@ -55,7 +55,7 @@
                                 <td>{{ item.sport }}</td>
                                 <td>
                                     <div class="btn_tab">
-                                        <button nz-button nzType="primary" (click)="onPlayers(item.id)"
+                                        <button nz-button nzType="primary" (click)="onPlayers(item.id);onTeams(item.id)"
                                             [disabled]="item.isPast" (click)="showModalMiddleManageTeams()"><span
                                                 nz-icon nzType="vertical-align-bottom" nzTheme="outline"></span>Join
                                             event</button>
@@ -73,6 +73,7 @@
                                         <ng-container *nzModalContent>
                                             <form nz-form>
                                                 <nz-form-item class="flex-container">
+                                                    <nz-tag [nzColor]="'purple'">Player management</nz-tag>
                                                     <nz-table class="flex-item" #basicTable [nzData]="players"
                                                         [nzPageIndex]="3" [nzScroll]="{ y: '250px' }">
                                                         <thead>
@@ -99,13 +100,25 @@
                             (nzOnConfirm)="deletePlayerFromEvent()" (nzOnCancel)="cancelDelete()">
                             <span nz-icon nzType="user-delete" nzTheme="outline"></span>
                             Leave</button>
-                        <button nz-button nzType="primary" [disabled]="isTimeToConfirm" (click)="confirmPlayer(selectedEventId)">
+                        <button nz-button nzType="primary" [disabled]="isTimeToConfirm"
+                            (click)="confirmPlayer(selectedEventId)">
                             <span nz-icon nzType="check" nzTheme="outline"></span>confirm
                         </button>
                         <button nz-button nzType="primary" (click)="onPlayers(selectedEventId)">
                             <span nz-icon nzType="reload" nzTheme="outline"></span>
                         </button>
-
+                        <nz-tag [nzColor]="'purple'">Teams management</nz-tag>
+                        <nz-tabset [(nzSelectedIndex)]="selectedIndex" nzType="editable-card" (nzAdd)="createTeam()"
+                            (nzClose)="deleteTeam($event)">
+                            <nz-tab *ngFor="let team of teams; index as i" nzClosable [nzTitle]="'team ' + (i + 1)">
+                                <nz-select [nzMaxTagCount]="6" nzMode="multiple" nzPlaceHolder="Please select players"
+                                    [(ngModel)]="tabs[i]" [name]="'team' + i"
+                                    (ngModelChange)="addPLayerToTeam($event, i)">
+                                    <nz-option *ngFor="let player of players" [nzLabel]="player.username"
+                                        [nzValue]="player"></nz-option>
+                                </nz-select>
+                            </nz-tab>
+                        </nz-tabset>
                     </div>
                     </nz-form-item>
                     </form>

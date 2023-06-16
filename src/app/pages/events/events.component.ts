@@ -21,11 +21,14 @@ export class EventsComponent {
   events: any = [];
   currentDate = new Date();
   players: any = [];
+  teams: any = [];
   currentUser: any;
   selectedEventId: number | undefined;
   position: number = 1;
   isTimeToConfirm: boolean = true;
   event: any;
+  tabs: any = [];
+  selectedIndex = 0;
 
 
   constructor(private nzMessageService: NzMessageService,
@@ -79,12 +82,17 @@ export class EventsComponent {
     this.selectedEventId = eventId;
     this.eventsService.getUserEventPlayers(eventId).subscribe(((res: any) => {
       this.players = res;
-    }))
+    }));
     this.eventsService.getEvent(eventId).subscribe(((res: any) => {
       this.event = res;
       this.checkTimetoConfirm(this.event.date);
-    }))
+    }));
+  }
 
+  onTeams(eventId: any) {
+    this.eventsService.getTeamsByEvent(eventId).subscribe(((res: any) => {
+      this.teams = res;
+    }));
   }
 
   async submitForm() {
@@ -195,5 +203,32 @@ export class EventsComponent {
   }
 
 
+  async deleteTeam({ index }: { index: number }) {
+    this.eventsService.deleteTeam(this.teams[index].id).subscribe({
+      next: (response: any) => {
+        this.nzMessageService.success('Event deleted');
+        this.onTeams(this.selectedEventId);
+      },
+      error: (error: any) => {
+        this.nzMessageService.error('Error deleting event');
+        console.log(error);
+      }
+    });
+  }
+
+  async createTeam() {
+    await firstValueFrom(this.eventsService.createTeam(this.selectedEventId))
+      .then(() => {
+        this.onTeams(this.selectedEventId);
+        this.selectedIndex = this.tabs.length;
+        this.notificationService.success("Succes", "Team created");
+      }).catch(() => {
+        this.notificationService.error("Error", "Team can't be created");
+      });
+  }
+
+  addPLayerToTeam(userId: any, index: any):void {
+    console.log(userId, this.teams[index].id);
+  }
 }
 

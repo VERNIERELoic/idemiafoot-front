@@ -42,6 +42,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 
 
@@ -91,6 +93,8 @@ registerLocaleData(en);
     NzMessageModule,
     NzTableModule,
     NzPopconfirmModule,
+    NzTabsModule,
+    NzTagModule,
     ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
