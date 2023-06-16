@@ -100,14 +100,11 @@ export class EventsComponent {
     const teamId = this.teams[index.index].id;
     this.eventsService.getUsersByTeam(teamId).subscribe(((res: any) => {
       this.teamPlayers = res.map((resPlayer: { username: any; }) => {
-        // Recherchez le joueur dans le tableau `players` qui correspond à `resPlayer`
         return this.players.find((player: { username: any; }) => player.username === resPlayer.username);
       });
       console.log(this.teamPlayers);
     }));
   }
-
-
 
   async submitForm() {
     await firstValueFrom(this.eventsService.createEvent(this.validateForm.value))
@@ -241,15 +238,17 @@ export class EventsComponent {
       });
   }
 
-  async addPLayerToTeam(user: any, index: any) {
-    await firstValueFrom(this.eventsService.addPlayerToTeam(user[0].user.id, this.teams[index].id))
+  async addPLayerToTeam(users: any[], index: any) {
+    const userIds = users.map(user => user.user.id);
+    await firstValueFrom(this.eventsService.addPlayerToTeam(userIds, this.teams[index].id))
       .then(() => {
-        this.notificationService.success("Succes", "Player added to team " + this.teams[index].id);
-        this.onTeamPlayers(index)
+        this.notificationService.success("Succes", "Players added to team " + this.teams[index].id);
+        this.onTeamPlayers(index);
       }).catch((error) => {
         console.error(error);
         this.notificationService.error("Error", error.message);
       });
   }
+
 }
 
