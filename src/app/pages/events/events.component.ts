@@ -23,6 +23,7 @@ export class EventsComponent {
   players: any = [];
   teams: any = [];
   teamPlayers: any = [];
+  freePlayers: any = [];
   currentUser: any;
   selectedEventId: number | undefined;
   position: number = 1;
@@ -46,12 +47,16 @@ export class EventsComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    this.validateForm = this.fb.group({
-      date: [null, [Validators.required]],
-      sport: [null, [Validators.required]],
-    });
-    this.onEvents();
-    this.currentUser = await firstValueFrom(this.authService.current())
+    try {
+      this.validateForm = this.fb.group({
+        date: [null, [Validators.required]],
+        sport: [null, [Validators.required]],
+      });
+      this.onEvents();
+      this.currentUser = await firstValueFrom(this.authService.current())
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   onEvents() {
@@ -79,31 +84,43 @@ export class EventsComponent {
     });
   }
 
-  onPlayers(eventId: any) {
+  async onPlayers(eventId: any) {
     this.selectedEventId = eventId;
-    this.eventsService.getUserEventPlayers(eventId).subscribe(((res: any) => {
-      this.players = res;
-    }));
-    this.eventsService.getEvent(eventId).subscribe(((res: any) => {
-      this.event = res;
-      this.checkTimetoConfirm(this.event.date);
-    }));
+    this.players = await firstValueFrom(this.eventsService.getUserEventPlayers(eventId));
+    this.event = await firstValueFrom(this.eventsService.getEvent(eventId));
+    this.checkTimetoConfirm(this.event.date);
   }
 
-  onTeams(eventId: any) {
-    this.eventsService.getTeamsByEvent(eventId).subscribe(((res: any) => {
-      this.teams = res;
-    }));
+  async onTeams(eventId: any) {
+    this.teams = await firstValueFrom(this.eventsService.getTeamsByEvent(eventId));
   }
 
-  onTeamPlayers(index: any) {
+  // onTeamPlayers(index: any) {
+  //   const teamId = this.teams[index.index].id;
+  //   this.eventsService.getUsersByTeam(teamId).subscribe(((res: any) => {
+  //     this.teamPlayers = res.map((resPlayer: { username: any; }) => {
+  //       // this.freePlayers = this.players.filter((player: any) => {
+  //       //   return !this.teamPlayers.includes(player);
+  //       // });
+  //       return this.players.find((player: { username: any; }) => player.username === resPlayer.username);
+  //     });
+  //     console.log("team players", this.teamPlayers);
+  //   }));
+  // }
+
+  async onTeamPlayers(index: any) {
     const teamId = this.teams[index.index].id;
-    this.eventsService.getUsersByTeam(teamId).subscribe(((res: any) => {
-      this.teamPlayers = res.map((resPlayer: { username: any; }) => {
-        return this.players.find((player: { username: any; }) => player.username === resPlayer.username);
-      });
-      console.log(this.teamPlayers);
-    }));
+    this.teamPlayers = await firstValueFrom(this.eventsService.getUsersByTeam(teamId));
+    console.log("team players", this.teamPlayers);
+  }
+
+  async onFreePlayers() {
+    try {
+      this.freePlayers = await this.eventsService.getFreePlayers(this.selectedEventId);
+      console.log("free players ", this.freePlayers);
+    } catch (error) {
+      console.log('Something went wrong when fetching free players: ', error);
+    }
   }
 
   async submitForm() {
@@ -215,15 +232,12 @@ export class EventsComponent {
 
 
   async deleteTeam({ index }: { index: number }) {
-    this.eventsService.deleteTeam(this.teams[index].id).subscribe({
-      next: (response: any) => {
-        this.nzMessageService.success('Event deleted');
-        this.onTeams(this.selectedEventId);
-      },
-      error: (error: any) => {
-        this.nzMessageService.error('Error deleting event');
-        console.log(error);
-      }
+    await firstValueFrom(this.eventsService.deleteTeam(this.teams[index].id)).then(() => {
+      this.nzMessageService.success('Event deleted');
+      this.onTeams(this.selectedEventId);
+    }).catch((error) => {
+      console.error(error);
+      this.notificationService.error("Error", error.message);
     });
   }
 
@@ -238,12 +252,12 @@ export class EventsComponent {
       });
   }
 
-  async addPLayerToTeam(users: any[], index: any) {
-    const userIds = users.map(user => user.user.id);
+  async addPlayerToTeam(users: any[], index: any) {
+    console.log(users)
+    const userIds = users.map(user => user.id);
     await firstValueFrom(this.eventsService.addPlayerToTeam(userIds, this.teams[index].id))
       .then(() => {
-        this.notificationService.success("Succes", "Players added to team " + this.teams[index].id);
-        this.onTeamPlayers(index);
+        this.notificationService.success("Succes", "Players " + userIds + " added to team " + this.teams[index].id);
       }).catch((error) => {
         console.error(error);
         this.notificationService.error("Error", error.message);
