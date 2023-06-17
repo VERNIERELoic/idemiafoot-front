@@ -111,13 +111,11 @@ export class EventsComponent {
   async onTeamPlayers(index: any) {
     const teamId = this.teams[index.index].id;
     this.teamPlayers = await firstValueFrom(this.eventsService.getUsersByTeam(teamId));
-    console.log("team players", this.teamPlayers);
   }
 
   async onFreePlayers() {
     try {
       this.freePlayers = await this.eventsService.getFreePlayers(this.selectedEventId);
-      console.log("free players ", this.freePlayers);
     } catch (error) {
       console.log('Something went wrong when fetching free players: ', error);
     }
@@ -257,6 +255,8 @@ export class EventsComponent {
     const userIds = users.map(user => user.id);
     await firstValueFrom(this.eventsService.addPlayerToTeam(userIds, this.teams[index].id))
       .then(() => {
+        this.freePlayers = this.freePlayers.filter((player: { id: any; }) => !userIds.includes(player.id));
+        console.log(this.freePlayers);
         this.notificationService.success("Succes", "Players " + userIds + " added to team " + this.teams[index].id);
       }).catch((error) => {
         console.error(error);
