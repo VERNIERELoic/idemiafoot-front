@@ -37,18 +37,23 @@ export class ProfileComponent implements OnInit {
       firstname: [null, [Validators.required]],
       lastname: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      password: [null, []],
+      checkPassword: [null, [this.confirmationValidator]],
       phone: [null, [Validators.required]],
     });
+    this.currentUser = await firstValueFrom(this.authService.current())
   }
 
   async update() {
-    const user: any = await this.userService.updateUser(this.validateForm.value)
+    const user: any = await this.userService.updateUser(this.currentUser.id, this.validateForm.value)
       .toPromise()
       .then(() => {
         this.router.navigate(['profile'])
+        this.notificationService.success("Succes", "Profile updated successfully");
+      }).catch(() => {
+        this.notificationService.error("Error", "Profile update failed");
       });
+      
   }
 
   updateConfirmValidator(): void {

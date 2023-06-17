@@ -46,7 +46,6 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
 
-
 registerLocaleData(en);
 
 @NgModule({

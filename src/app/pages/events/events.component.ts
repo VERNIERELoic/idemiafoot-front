@@ -32,6 +32,9 @@ export class EventsComponent {
   tabs: any = [];
   selectedIndex = 0;
 
+  tabs = ['Team 1', 'Team 2'];
+  selectedIndex = 0;
+
 
   constructor(private nzMessageService: NzMessageService,
     private fb: UntypedFormBuilder,
@@ -228,7 +231,6 @@ export class EventsComponent {
     }
   }
 
-
   async deleteTeam({ index }: { index: number }) {
     await firstValueFrom(this.eventsService.deleteTeam(this.teams[index].id)).then(() => {
       this.nzMessageService.success('Event deleted');
@@ -264,5 +266,12 @@ export class EventsComponent {
       });
   }
 
-}
+  closeTab({ index }: { index: number }): void {
+    this.tabs.splice(index, 1);
+  }
 
+  newTab(): void {
+    this.tabs.push('Team ' + this.tabs.length);
+    this.selectedIndex = this.tabs.length;
+  }
+}
