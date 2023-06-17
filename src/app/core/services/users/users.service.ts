@@ -14,8 +14,8 @@ export class UsersService {
     return this.http.post(`${environment.apiUrl}/users/register`, user);
   }
 
-  updateUser(user: any): any {
-    return this.http.post(`${environment.apiUrl}/users/update`, user);
+  updateUser(id: number, user: any): any {
+    return this.http.put(`${environment.apiUrl}/users/update/${id}`, user);
   }
 
   removeUser(user: any): any {

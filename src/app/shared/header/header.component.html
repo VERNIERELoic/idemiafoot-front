@@ -3,15 +3,13 @@
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
         <li style="background-color: transparent; color: rgb(67, 0, 153);" nz-menu-item routerLink='/'>Home</li>
         <li style="background-color: transparent; color: rgb(67, 0, 153);" nz-menu-item routerLink='/events'>Events</li>
-        <li style="background-color: transparent; color: rgb(67, 0, 153);" nz-menu-item routerLink='/chat'>Chat</li>
-        <!-- <li *ngIf="(isLoggedIn | async)" routerLink='chat' style="background-color: transparent; color: rgba(0, 57, 245, 0.65);" nz-menu-item>Chat</li> -->
-        <button *ngIf="!(isLoggedIn | async)" routerLink='register' nz-button nzType="primary" nzShape="round"><span
+        <button *ngIf="!(isLoggedIn | async)" routerLink='/register' nz-button nzType="primary" nzShape="round"><span
                 nz-icon nzType="user-add" nzTheme="outline"></span>register</button>
-        <button *ngIf="!(isLoggedIn | async)" routerLink='login' nz-button nzType="primary" nzShape="round"><span
+        <button *ngIf="!(isLoggedIn | async)" routerLink='/login' nz-button nzType="primary" nzShape="round"><span
                 nz-icon nzType="login" nzTheme="outline"></span>login</button>
-        <button *ngIf="(isLoggedIn | async)" routerLink='' nz-button nzType="primary" nzShape="round"
+        <button *ngIf="(isLoggedIn | async)" routerLink='/' nz-button nzType="primary" nzShape="round"
             (click)="logout()"><span nz-icon nzType="logout" nzTheme="outline"></span>logout</button>
-        <button *ngIf="(isLoggedIn | async)" routerLink='profile' nz-button nzType="primary" nzShape="round">
+        <button *ngIf="(isLoggedIn | async)" routerLink='/profile' nz-button nzType="primary" nzShape="round">
             <span nz-icon nzType="user" nzTheme="outline"></span>{{ username }}</button>
     </ul>
 </nz-header>
