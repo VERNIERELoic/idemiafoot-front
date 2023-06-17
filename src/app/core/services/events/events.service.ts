@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environments'
+import { environment } from 'src/environments/environment'
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class EventsService {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   createEvent(event: any): any {
     return this.http.post(`${environment.apiUrl}/events/createEvent`, event);
