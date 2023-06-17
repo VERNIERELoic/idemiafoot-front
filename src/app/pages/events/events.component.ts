@@ -32,10 +32,6 @@ export class EventsComponent {
   tabs: any = [];
   selectedIndex = 0;
 
-  tabs = ['Team 1', 'Team 2'];
-  selectedIndex = 0;
-
-
   constructor(private nzMessageService: NzMessageService,
     private fb: UntypedFormBuilder,
     private eventsService: EventsService,

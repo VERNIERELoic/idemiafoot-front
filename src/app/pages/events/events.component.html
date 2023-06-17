@@ -118,16 +118,14 @@
                                     <nz-option *ngFor="let player of freePlayers"
                                         [nzLabel]="player.username + ' (Free)'" [nzValue]="player"></nz-option>
                                     <nz-option *ngFor="let player of teamPlayers" [nzHide]="true"
-                                        [nzLabel]="player.username + ' (Assigned to n°' + (i+1) + ')'" [nzValue]="player"></nz-option>
+                                        [nzLabel]="player.username + ' (Assigned to n°' + (i+1) + ')'"
+                                        [nzValue]="player"></nz-option>
                                 </nz-select>
                             </nz-tab>
                         </nz-tabset>
                     </div>
                     </nz-form-item>
                     </form>
-                    <nz-tabset [(nzSelectedIndex)]="selectedIndex" nzType="editable-card" (nzAdd)="newTab()" (nzClose)="closeTab($event)">
-                        <nz-tab *ngFor="let tab of tabs" nzClosable [nzTitle]="tab">Content of {{ tab }}</nz-tab>
-                    </nz-tabset>
                     </ng-container>
                     </nz-modal>
                     </td>
