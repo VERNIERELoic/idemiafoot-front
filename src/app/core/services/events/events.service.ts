@@ -63,12 +63,9 @@ export class EventsService {
     return this.http.get(`${environment.apiUrl}/teams/getTeamsByEvent/${eventId}`);
   }
 
-  getFreePlayers(eventId: any): Promise<any> {
-    return this.http.get(`${environment.apiUrl}/teams/getFreePlayers/${eventId}`).toPromise()
-      .catch(error => {
-        console.error('Error in getFreePlayers: ', error);
-        throw error; // rethrow the error, so it can be caught in the component
-      });
+  getFreePlayers(eventId: any): any {
+    const body = { eventId };
+    return this.http.post(`${environment.apiUrl}/teams/getFreePlayers`, body);
   }
   
   addPlayerToTeam(userIds: number[], teamId: any): any {
