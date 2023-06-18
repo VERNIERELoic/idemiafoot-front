@@ -55,7 +55,7 @@
                                 <td>{{ item.sport }}</td>
                                 <td>
                                     <div class="btn_tab">
-                                        <button nz-button nzType="primary" (click)="onPlayers(item.id);onTeams(item.id)"
+                                        <button nz-button nzType="primary" (click)="onPlayers(item.id);onTeams(item.id);onFreePlayers()"
                                             [disabled]="item.isPast" (click)="showModalMiddleManageTeams()"><span
                                                 nz-icon nzType="vertical-align-bottom" nzTheme="outline"></span>Join
                                             event</button>
