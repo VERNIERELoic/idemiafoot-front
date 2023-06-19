@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NbChatComponent } from '@nebular/theme';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ChatComponent } from './pages/chat/chat.component';
 import { EventsComponent } from './pages/events/events.component';
