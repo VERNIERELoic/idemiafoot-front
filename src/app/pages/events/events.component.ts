@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { EventsService } from 'src/app/core/services/events/events.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';

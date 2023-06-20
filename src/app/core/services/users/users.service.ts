@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment'
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +25,10 @@ export class UsersService {
     const body = { username };
     return this.http.post(`${environment.apiUrl}/users/findByUsername`, body);
   }
+
+  addAdmin(id: any): any { }
+
+  getUserById(id: any): any { }
+
+  removeAdmin(id: any): any { }
 }

@@ -1,0 +1,22 @@
+:host {
+    text-align: center;
+}
+
+.layout {
+    min-height: 100vh;
+}
+
+.inner-box {
+    background: transparent;
+    padding: 20px 0;
+}
+
+nz-content {
+    padding: 0 14px;
+    margin-top: 64px;
+    font-size: large;
+}
+
+nz-footer {
+    text-align: center;
+}
