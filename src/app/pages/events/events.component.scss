@@ -22,12 +22,17 @@ nz-form-control {
     max-width: 30%;
 }
 
-nz-tabset {
-    max-width: 70%;
-}
+// nz-tabset {
+//     max-width: 70%;
+// }
 
 nz-select {
     width: 100%;
+}
+
+nz-tag {
+    margin-bottom: 3%;
+    justify-content: space-between;
 }
 
 .btn_action button {
