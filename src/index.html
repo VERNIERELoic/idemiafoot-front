@@ -15,7 +15,17 @@
 
     gtag('config', 'G-1ED1WFD5W3');
   </script>
+  <script>
+    (function (l) {
+      if (sessionStorage.redirect) {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        l.replace(redirect);
+      }
+    }(window.location))
+  </script>
 </head>
+
 <body>
   <app-root></app-root>
 </body>
