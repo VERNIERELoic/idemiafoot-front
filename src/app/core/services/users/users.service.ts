@@ -26,9 +26,22 @@ export class UsersService {
     return this.http.post(`${environment.apiUrl}/users/findByUsername`, body);
   }
 
-  addAdmin(id: any): any { }
+  findAll(): any {
+    return this.http.get(`${environment.apiUrl}/users`);
+  }
 
-  getUserById(id: any): any { }
+  getUserById(userId: any): any {
+    return this.http.get(`${environment.apiUrl}/users/addAdmin/${userId}`);
+  }
 
-  removeAdmin(id: any): any { }
+  addAdmin(userId: any): any {
+    const body = { userId };
+    return this.http.post(`${environment.apiUrl}/users/addAdmin`, body);
+  }
+
+  removeAdmin(userId: any): any {
+    const body = { userId };
+    return this.http.post(`${environment.apiUrl}/users/removeAdmin`, body);
+  }
+
 }

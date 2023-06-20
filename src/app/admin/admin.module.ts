@@ -13,6 +13,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { FormsModule } from '@angular/forms';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { UsersService } from '../core/services/users/users.service';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { UsersService } from '../core/services/users/users.service';
     NzButtonModule,
     NzFormModule,
     NzTableModule,
+    NzAutocompleteModule,
+    NzTagModule,
   ], 
   providers: [
     UsersService,

@@ -5,29 +5,44 @@
             <div class="bar">
                 <h3>Search for user</h3>
                 <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                    <input type="text" nz-input [(ngModel)]="searchText"
-                        placeholder="rechercher par nom d'utilisateur" />
+                    <input placeholder="input here" nz-input [(ngModel)]="inputValue" (input)="onInput($event)"
+                        [nzAutocomplete]="auto" />
+                    <nz-autocomplete [nzDataSource]="options" nzBackfill #auto></nz-autocomplete>
                 </nz-input-group>
                 <ng-template #suffixIconButton>
                     <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
                 </ng-template>
             </div>
             <ul nz-list [nzDataSource]="users" nzBordered nzSize="large">
-                <nz-list-header>Result</nz-list-header>
-                <li nz-list-item nzNoFlex *ngFor=" let  user of users">
-                    <ul nz-list-item-actions>
-                        <nz-list-item-action>
-                            <div class="action">
-                                <label nz-checkbox [(ngModel)]="user.admin"
-                                    (ngModelChange)="checkSelectedUser(user)">admin</label>
-                                <button nz-button nzType="primary" nzDanger (click)="removeUser(user)"><span nz-icon
-                                        nzType="delete" nzTheme="outline"></span></button>
-                            </div>
-                        </nz-list-item-action>
-                    </ul>
-                    {{ user.name }} | {{ user.email }}
-                </li>
-                <nz-list-footer>👹</nz-list-footer>
+                <nz-table #basicTable [nzData]="users">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Admin</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of filteredUsers">
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <nz-tag *ngIf="(user.isAdmin)" nzColor="warning">
+                                    <span nz-icon nzType="exclamation-circle"></span>
+                                    <span>Yes</span>
+                                </nz-tag>
+                                <nz-tag *ngIf="!(user.isAdmin)" nzColor="processing">
+                                    <span nz-icon nzType="check-circle"></span>
+                                    <span>No</span>
+                                </nz-tag>
+                            </td>
+                            <td><button nzDanger nz-button nzType="primary">Delete <span nz-icon nzType="delete"
+                                        nzTheme="outline"></span></button></td>
+                        </tr>
+
+                    </tbody>
+                </nz-table>
             </ul>
         </div>
     </nz-tab>

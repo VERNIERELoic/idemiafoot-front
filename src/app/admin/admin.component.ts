@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { UsersService } from '../core/services/users/users.service';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -11,12 +12,20 @@ export class AdminComponent {
   isVisible = false;
   users: any[] = [];
   searchText: any;
+  inputValue?: string;
+  options: string[] = [];
+  filteredUsers: any[] = [];
 
   constructor(private usersService: UsersService) {
 
   };
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.usersService.findAll().subscribe((users: any[]) => {
+      this.users = users;
+      this.filteredUsers = users;
+      console.log(users);
+    });
   }
 
   async checkSelectedUser(user: any) {
@@ -30,6 +39,15 @@ export class AdminComponent {
     }
   }
 
+  onInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.filteredUsers = value ?
+      this.users.filter(user => user.username.startsWith(value)) :
+      this.users;
+
+    this.options = this.filteredUsers.map(user => user.username);
+  }
+
   async removeUser(user: { id: any; }) {
     await firstValueFrom(this.usersService.removeUser(user.id));
   }
@@ -40,20 +58,5 @@ export class AdminComponent {
 
   select(date: Date): Date {
     return date;
-  }
-
-
-  showModal(): void {
-    this.isVisible = true;
-  }
-
-  handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
-  }
-
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
   }
 }
