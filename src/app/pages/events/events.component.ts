@@ -249,7 +249,8 @@ export class EventsComponent {
 
   async addPlayerToTeam(users: any[], index: any) {
     const userIds = users.map(user => user.id);
-    await firstValueFrom(this.eventsService.addPlayerToTeam(userIds, this.teams[index].id))
+    const teamIds = this.teams[index].id;
+    await firstValueFrom(this.eventsService.addPlayerToTeam(userIds, teamIds))
       .then(() => {
         this.freePlayers = this.freePlayers.filter((player: { id: any; }) => !userIds.includes(player.id));
         this.notificationService.success("Succes", "Players " + userIds + " added to team " + this.teams[index].id);
