@@ -1,0 +1,35 @@
+<h1 class="title">Administration</h1>
+<nz-tabset class="menu-admin">
+    <nz-tab nzTitle="Utilisateurs">
+        <div class="search">
+            <div class="bar">
+                <h3>Search for user</h3>
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                    <input type="text" nz-input [(ngModel)]="searchText"
+                        placeholder="rechercher par nom d'utilisateur" />
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+                </ng-template>
+            </div>
+            <ul nz-list [nzDataSource]="users" nzBordered nzSize="large">
+                <nz-list-header>Result</nz-list-header>
+                <li nz-list-item nzNoFlex *ngFor=" let  user of users">
+                    <ul nz-list-item-actions>
+                        <nz-list-item-action>
+                            <div class="action">
+                                <label nz-checkbox [(ngModel)]="user.admin"
+                                    (ngModelChange)="checkSelectedUser(user)">admin</label>
+                                <button nz-button nzType="primary" nzDanger (click)="removeUser(user)"><span nz-icon
+                                        nzType="delete" nzTheme="outline"></span></button>
+                            </div>
+                        </nz-list-item-action>
+                    </ul>
+                    {{ user.name }} | {{ user.email }}
+                </li>
+                <nz-list-footer>👹</nz-list-footer>
+            </ul>
+        </div>
+    </nz-tab>
+    <nz-tab nzTitle="Messages">Content of Tab Pane 3</nz-tab>
+</nz-tabset>

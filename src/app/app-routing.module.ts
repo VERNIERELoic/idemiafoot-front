@@ -22,19 +22,28 @@ const routes: Routes = [
     component: RegisterComponent
   },
 
-  { path: 'profile', 
-    component: ProfileComponent, 
-    canActivate: [AuthGuard] 
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
 
-  { path: 'events', 
-  component: EventsComponent, 
-  canActivate: [AuthGuard] 
+  {
+    path: 'events',
+    component: EventsComponent,
+    canActivate: [AuthGuard]
   },
 
-  { path: 'chat', 
-    component: ChatComponent, 
-    canActivate: [AuthGuard] 
+  {
+    path: 'chat',
+    component: ChatComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate : [AuthGuard]
   },
 ];
 

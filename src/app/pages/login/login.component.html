@@ -1,52 +1,37 @@
-<html>
-
-<body>
-
-  <nz-layout class="layout">
-    <app-header></app-header>
-    <nz-content>
-      <nz-divider nzOrientation="left" nzText=''></nz-divider>
-      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-        <div nz-col class="gutter-row" [nzSpan]="6">
-          <div class="inner-box"></div>
-        </div>
-        <div nz-col class="gutter-row" [nzSpan]="24">
-          <div class="inner-box">
-            <form nz-form [formGroup]="validateForm" class="login-form">
-              <nz-form-item>
-                <nz-form-control nzErrorTip="Invalid username !">
-                  <nz-input-group nzPrefixIcon="user">
-                    <input type="text" nz-input formControlName="username" placeholder="username" />
-                  </nz-input-group>
-                </nz-form-control>
-              </nz-form-item>
-              <nz-form-item>
-                <nz-form-control nzErrorTip="Enter password !">
-                  <nz-input-group nzPrefixIcon="lock">
-                    <input type="password" nz-input formControlName="password" placeholder="Password" />
-                  </nz-input-group>
-                </nz-form-control>
-              </nz-form-item>
-              <div nz-row class="login-form-margin">
-                <div nz-col [nzSpan]="12">
-                  <a href="recover" class="login-form-forgot">Recover password</a>
-                </div>
-              </div>
-              <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="login()"
-                nzShape="round">Login</button>
-              Or
-              <a routerLink="/register">Register</a>
-            </form>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col class="gutter-row" [nzSpan]="6">
+    <div class="inner-box"></div>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="24">
+    <div class="inner-box">
+      <form nz-form [formGroup]="validateForm" class="login-form">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Invalid username !">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input formControlName="username" placeholder="username" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Enter password !">
+            <nz-input-group nzPrefixIcon="lock">
+              <input type="password" nz-input formControlName="password" placeholder="Password" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-row class="login-form-margin">
+          <div nz-col [nzSpan]="12">
+            <a href="recover" class="login-form-forgot">Recover password</a>
           </div>
         </div>
-        <div nz-col class="gutter-row" [nzSpan]="6">
-          <div class="inner-box"></div>
-        </div>
-      </div>
-
-    </nz-content>
-    <app-footer></app-footer>
-  </nz-layout>
-</body>
-
-</html>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="login()"
+          nzShape="round">Login</button>
+        Or
+        <a routerLink="/register">Register</a>
+      </form>
+    </div>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="6">
+    <div class="inner-box"></div>
+  </div>
+</div>
