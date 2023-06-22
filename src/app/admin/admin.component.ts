@@ -52,11 +52,8 @@ export class AdminComponent {
     await firstValueFrom(this.usersService.removeUser(user.id));
   }
 
-  panelChange(change: { date: Date; mode: string }): void {
-    console.log(change.date, change.mode);
+  addAdmin(adminValue: any) {
+    console.log("admin =", adminValue);
   }
 
-  select(date: Date): Date {
-    return date;
-  }
 }

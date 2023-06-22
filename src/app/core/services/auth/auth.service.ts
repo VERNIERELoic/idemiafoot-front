@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment'
 import { Router } from '@angular/router';
-import { catchError, map, tap } from 'rxjs/operators'
+import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { BehaviorSubject, Observable, throwError, shareReplay, Subject } from 'rxjs';
 
 @Injectable({
@@ -13,25 +13,35 @@ export class AuthService {
 
   isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
   currentUser: Subject<any> = new BehaviorSubject(null);
+  currentUserData: any = null;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { 
+    this.currentUser.subscribe((data) => this.currentUserData = data);
 
-  current() {
-    return this.http.get(`${environment.apiUrl}/users/current`).pipe(shareReplay(), tap((user: any) => { this.currentUser.next(user);}))
   }
 
-  login(credentials: any): any {
+  current() {
+    return this.http.get(`${environment.apiUrl}/users/current`).pipe(shareReplay(), tap((user: any) => { this.currentUser.next(user); }))
+  }
+
+  login(credentials: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/auth/login`, credentials).pipe(
-      map((res: any) => {
+      tap((res: any) => {
         localStorage.setItem('token', res.access_token);
         this.isLoginSubject.next(true);
       }),
+      switchMap(() => this.current()),
       catchError(this.formatErrors)
     );
   }
 
+
   isLoggedIn(): Observable<boolean> {
     return this.isLoginSubject.asObservable();
+  }
+
+  getCurrentUser(): any {
+    return this.currentUser;
   }
 
 

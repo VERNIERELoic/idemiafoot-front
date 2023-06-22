@@ -15,6 +15,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { UsersService } from '../core/services/users/users.service';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzTableModule,
     NzAutocompleteModule,
     NzTagModule,
+    NzSwitchModule,
   ], 
   providers: [
     UsersService,

@@ -1,6 +1,6 @@
 <h1 class="title">Administration</h1>
 <nz-tabset class="menu-admin">
-    <nz-tab nzTitle="Utilisateurs">
+    <nz-tab nzTitle="Users">
         <div class="search">
             <div class="bar">
                 <h3>Search for user</h3>
@@ -28,16 +28,12 @@
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
                             <td>
-                                <nz-tag *ngIf="(user.isAdmin)" nzColor="warning">
-                                    <span nz-icon nzType="exclamation-circle"></span>
-                                    <span>Yes</span>
-                                </nz-tag>
-                                <nz-tag *ngIf="!(user.isAdmin)" nzColor="processing">
-                                    <span nz-icon nzType="check-circle"></span>
-                                    <span>No</span>
-                                </nz-tag>
+                                <nz-switch [ngModel]="user.isAdmin" [nzCheckedChildren]="checkedTemplate"
+                                    [nzUnCheckedChildren]="unCheckedTemplate" (ngModelChange)="addAdmin($event)"></nz-switch>
+                                <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
+                                <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
                             </td>
-                            <td><button nzDanger nz-button nzType="primary">Delete <span nz-icon nzType="delete"
+                            <td><button nzDanger nz-button nzType="primary" nzShape="round">Delete <span nz-icon nzType="delete"
                                         nzTheme="outline"></span></button></td>
                         </tr>
 
