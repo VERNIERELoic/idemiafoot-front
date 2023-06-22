@@ -13,10 +13,8 @@ export class AdminGuard {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const currentUser = this.authService.getCurrentUser().getValue(); // modification ici
-    console.log('currentUser', currentUser); // debug
+    const currentUser = this.authService.getCurrentUser().getValue();
     if (currentUser && currentUser.isAdmin) {
-      console.log('isAdmin', currentUser.isAdmin); // debug
       return true;
     }
     this.router.navigate(['']);

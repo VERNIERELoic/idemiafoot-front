@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { EventsService } from 'src/app/core/services/events/events.service';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { firstValueFrom, interval, Subscription, timer } from 'rxjs';
+import { Subscription, firstValueFrom, interval, timer } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { EventsService } from 'src/app/core/services/events/events.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
@@ -12,7 +12,6 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent {
-
   eventsSub: Subscription;
   isVisibleCreateEvent = false;
   isVisibleJoin = false;
@@ -29,7 +28,7 @@ export class EventsComponent {
   isTimeToConfirm: boolean = true;
   event: any;
   tabs: any = [];
-  selectedIndex = 0;
+  selectedIndex: any;
 
   constructor(private nzMessageService: NzMessageService,
     private fb: UntypedFormBuilder,
@@ -92,19 +91,6 @@ export class EventsComponent {
   async onTeams(eventId: any) {
     this.teams = await firstValueFrom(this.eventsService.getTeamsByEvent(eventId));
   }
-
-  // onTeamPlayers(index: any) {
-  //   const teamId = this.teams[index.index].id;
-  //   this.eventsService.getUsersByTeam(teamId).subscribe(((res: any) => {
-  //     this.teamPlayers = res.map((resPlayer: { username: any; }) => {
-  //       // this.freePlayers = this.players.filter((player: any) => {
-  //       //   return !this.teamPlayers.includes(player);
-  //       // });
-  //       return this.players.find((player: { username: any; }) => player.username === resPlayer.username);
-  //     });
-  //     console.log("team players", this.teamPlayers);
-  //   }));
-  // }
 
   async onTeamPlayers(index: any) {
     const teamId = this.teams[index.index].id;
@@ -267,4 +253,5 @@ export class EventsComponent {
     this.tabs.push('Team ' + this.tabs.length);
     this.selectedIndex = this.tabs.length;
   }
+
 }

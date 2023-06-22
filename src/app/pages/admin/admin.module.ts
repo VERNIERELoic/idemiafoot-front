@@ -12,10 +12,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FormsModule } from '@angular/forms';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { UsersService } from '../core/services/users/users.service';
+import { UsersService } from '../../core/services/users/users.service';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NzAutocompleteModule,
     NzTagModule,
     NzSwitchModule,
+    NzPaginationModule,
   ], 
   providers: [
     UsersService,

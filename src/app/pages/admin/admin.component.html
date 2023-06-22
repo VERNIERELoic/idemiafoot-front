@@ -1,26 +1,26 @@
-<h1 class="title">Administration</h1>
+<h1 class="title">Administration 🔐</h1>
 <nz-tabset class="menu-admin">
     <nz-tab nzTitle="Users">
         <div class="search">
             <div class="bar">
                 <h3>Search for user</h3>
                 <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                    <input placeholder="input here" nz-input [(ngModel)]="inputValue" (input)="onInput($event)"
+                    <input  placeholder="username here" nz-input [(ngModel)]="inputValue" (input)="onInput($event)"
                         [nzAutocomplete]="auto" />
                     <nz-autocomplete [nzDataSource]="options" nzBackfill #auto></nz-autocomplete>
                 </nz-input-group>
                 <ng-template #suffixIconButton>
-                    <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+                    <button nz-button nzType="primary" nzSearch nzShape="round"><span nz-icon nzType="search"></span></button>
                 </ng-template>
             </div>
             <ul nz-list [nzDataSource]="users" nzBordered nzSize="large">
                 <nz-table #basicTable [nzData]="users">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Email</th>
+                            <th><span nz-icon nzType="user" nzTheme="outline"></span></th>
+                            <th><span nz-icon nzType="mail" nzTheme="outline"></span></th>
                             <th>Admin</th>
-                            <th>Actions</th>
+                            <th><span nz-icon nzType="tool" nzTheme="outline"></span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,14 +29,14 @@
                             <td>{{ user.email }}</td>
                             <td>
                                 <nz-switch [ngModel]="user.isAdmin" [nzCheckedChildren]="checkedTemplate"
-                                    [nzUnCheckedChildren]="unCheckedTemplate" (ngModelChange)="addAdmin($event)"></nz-switch>
+                                    [nzUnCheckedChildren]="unCheckedTemplate"
+                                    (ngModelChange)="switchAdmin($event, user.id)"></nz-switch>
                                 <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
                                 <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
                             </td>
-                            <td><button nzDanger nz-button nzType="primary" nzShape="round">Delete <span nz-icon nzType="delete"
-                                        nzTheme="outline"></span></button></td>
+                            <td><button nzDanger nz-button nzType="primary" nzShape="round">Delete<span nz-icon
+                                        nzType="delete" nzTheme="outline"></span></button></td>
                         </tr>
-
                     </tbody>
                 </nz-table>
             </ul>

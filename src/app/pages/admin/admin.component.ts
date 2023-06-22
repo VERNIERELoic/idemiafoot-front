@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { UsersService } from '../core/services/users/users.service';
+import { UsersService } from '../../core/services/users/users.service';
 
 
 @Component({
@@ -24,17 +24,14 @@ export class AdminComponent {
     this.usersService.findAll().subscribe((users: any[]) => {
       this.users = users;
       this.filteredUsers = users;
-      console.log(users);
     });
   }
 
   async checkSelectedUser(user: any) {
     var admin: any = await firstValueFrom(this.usersService.getUserById(user.id));
     if (admin.admin) {
-      console.log("if ok");
       await firstValueFrom(this.usersService.removeAdmin(user.id));
     } else {
-      console.log("else ok");
       await firstValueFrom(this.usersService.addAdmin(user.id));
     }
   }
@@ -52,8 +49,12 @@ export class AdminComponent {
     await firstValueFrom(this.usersService.removeUser(user.id));
   }
 
-  addAdmin(adminValue: any) {
-    console.log("admin =", adminValue);
+  async switchAdmin(adminValue: any, userId: any) {
+    if (adminValue) {
+      await firstValueFrom(this.usersService.addAdmin(userId));
+    }else{
+      await firstValueFrom(this.usersService.removeAdmin(userId));
+    }
   }
 
 }
