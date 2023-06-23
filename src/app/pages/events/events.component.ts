@@ -86,11 +86,12 @@ export class EventsComponent {
     this.selectedEventId = eventId;
     this.players = await firstValueFrom(this.eventsService.getUserEventPlayers(eventId));
     this.event = await firstValueFrom(this.eventsService.getEvent(eventId));
-    this.checkTimetoConfirm(this.event.date);
   }
 
   async onTeams(eventId: any) {
+    this.teams = [];
     this.teams = await firstValueFrom(this.eventsService.getTeamsByEvent(eventId));
+    this.checkTimetoConfirm(this.event.date);
   }
 
   // onTeamPlayers(index: any) {
@@ -113,6 +114,7 @@ export class EventsComponent {
   }
 
   async onFreePlayers() {
+    this.freePlayers = [];
     this.freePlayers = await firstValueFrom(this.eventsService.getFreePlayers(this.selectedEventId));
   }
 
@@ -216,7 +218,8 @@ export class EventsComponent {
     if (timeUntilEvent > 0) {
       const source = timer(timeUntilEvent);
       source.subscribe(() => {
-        this.isTimeToConfirm = false;
+        this.isTimeToConfirm = true;
+        console.log(this.isTimeToConfirm);
       });
     } else {
       this.isTimeToConfirm = false;
