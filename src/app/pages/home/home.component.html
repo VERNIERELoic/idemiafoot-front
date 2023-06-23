@@ -8,6 +8,10 @@
       <p>Booking platform and team making</p>
       <button [routerLink]="['/events']" routerLinkActive="router-link-active" nz-button nzShape="round"
         nzType="primary">Search match now !</button>
+      <div class="lottie-animation mt-10">
+        <ng-lottie [options]="options" (animationCreated)="onAnimate($event)">
+        </ng-lottie>
+      </div>
     </div>
   </div>
   <div nz-col class="gutter-row" [nzSpan]="6">

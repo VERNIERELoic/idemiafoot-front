@@ -1,46 +1,61 @@
-<h1 class="title">Administration 🔐</h1>
-<nz-tabset class="menu-admin">
-    <nz-tab nzTitle="Users">
-        <div class="search">
-            <div class="bar">
-                <h3>Search for user</h3>
-                <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                    <input  placeholder="username here" nz-input [(ngModel)]="inputValue" (input)="onInput($event)"
-                        [nzAutocomplete]="auto" />
-                    <nz-autocomplete [nzDataSource]="options" nzBackfill #auto></nz-autocomplete>
-                </nz-input-group>
-                <ng-template #suffixIconButton>
-                    <button nz-button nzType="primary" nzSearch nzShape="round"><span nz-icon nzType="search"></span></button>
-                </ng-template>
-            </div>
-            <ul nz-list [nzDataSource]="users" nzBordered nzSize="large">
-                <nz-table #basicTable [nzData]="users">
-                    <thead>
-                        <tr>
-                            <th><span nz-icon nzType="user" nzTheme="outline"></span></th>
-                            <th><span nz-icon nzType="mail" nzTheme="outline"></span></th>
-                            <th>Admin</th>
-                            <th><span nz-icon nzType="tool" nzTheme="outline"></span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let user of filteredUsers">
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>
-                                <nz-switch [ngModel]="user.isAdmin" [nzCheckedChildren]="checkedTemplate"
-                                    [nzUnCheckedChildren]="unCheckedTemplate"
-                                    (ngModelChange)="switchAdmin($event, user.id)"></nz-switch>
-                                <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
-                                <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
-                            </td>
-                            <td><button nzDanger nz-button nzType="primary" nzShape="round">Delete<span nz-icon
-                                        nzType="delete" nzTheme="outline"></span></button></td>
-                        </tr>
-                    </tbody>
-                </nz-table>
-            </ul>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div nz-col class="gutter-row" [nzSpan]="6">
+        <div class="inner-box"></div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="24">
+        <div class="inner-box">
+            <h1 class="title">Administration 🔐</h1>
+            <nz-tabset class="menu-admin">
+                <nz-tab nzTitle="Users">
+                    <div class="search">
+                        <div class="bar">
+                            <h3>Search for user</h3>
+                            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                                <input placeholder="username here" nz-input [(ngModel)]="inputValue"
+                                    (input)="onInput($event)" [nzAutocomplete]="auto" />
+                                <nz-autocomplete [nzDataSource]="options" nzBackfill #auto></nz-autocomplete>
+                            </nz-input-group>
+                            <ng-template #suffixIconButton>
+                                <button nz-button nzType="primary" nzSearch nzShape="round"><span nz-icon
+                                        nzType="search"></span></button>
+                            </ng-template>
+                        </div>
+                        <ul nz-list [nzDataSource]="users" nzBordered nzSize="large">
+                            <nz-table #basicTable [nzData]="users">
+                                <thead>
+                                    <tr>
+                                        <th><span nz-icon nzType="user" nzTheme="outline"></span></th>
+                                        <th><span nz-icon nzType="mail" nzTheme="outline"></span></th>
+                                        <th>Admin</th>
+                                        <th><span nz-icon nzType="tool" nzTheme="outline"></span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of filteredUsers">
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>
+                                            <nz-switch [ngModel]="user.isAdmin" [nzCheckedChildren]="checkedTemplate"
+                                                [nzUnCheckedChildren]="unCheckedTemplate"
+                                                (ngModelChange)="switchAdmin($event, user.id)"></nz-switch>
+                                            <ng-template #checkedTemplate><span nz-icon
+                                                    nzType="check"></span></ng-template>
+                                            <ng-template #unCheckedTemplate><span nz-icon
+                                                    nzType="close"></span></ng-template>
+                                        </td>
+                                        <td><button nzDanger nz-button nzType="primary" nzShape="round">Delete<span
+                                                    nz-icon nzType="delete" nzTheme="outline"></span></button></td>
+                                    </tr>
+                                </tbody>
+                            </nz-table>
+                        </ul>
+                    </div>
+                </nz-tab>
+                <nz-tab nzTitle="Others">Content of Tab Pane 3</nz-tab>
+            </nz-tabset>
         </div>
-    </nz-tab>
-    <nz-tab nzTitle="Messages">Content of Tab Pane 3</nz-tab>
-</nz-tabset>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="6">
+        <div class="inner-box"></div>
+    </div>
+</div>

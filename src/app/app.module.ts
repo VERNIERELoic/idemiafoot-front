@@ -30,6 +30,15 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
+// Add these two
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+
+// Export this function
+export function playerFactory(): any {  
+  return import('lottie-web');
+}
+
 registerLocaleData(en);
 
 @NgModule({
@@ -63,6 +72,7 @@ registerLocaleData(en);
     NzDividerModule,
     NzTableModule,
     NzPopconfirmModule,
+    LottieModule.forRoot({ player: playerFactory }), 
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

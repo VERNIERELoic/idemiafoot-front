@@ -33,6 +33,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { EventsService } from 'src/app/core/services/events/events.service';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { EventsService } from 'src/app/core/services/events/events.service';
     NzPopconfirmModule,
     NzTabsModule,
     NzTagModule,
+    NzSpinModule,
   ],
   providers: [
     EventsService,
