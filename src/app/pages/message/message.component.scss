@@ -2,7 +2,44 @@ nz-spin {
     margin-top: 10%;
 }
 
-.lottie-animation {
+// .lottie-animation {
+//     margin: auto;
+//     width: 50%;
+// }
+
+.chat {
+    max-height: 500px;
     margin: auto;
-    width: 50%;
+    overflow: auto;
 }
+
+.left-align-content {
+    text-align: left;
+    justify-content: space-between;
+}
+
+.right-align-content {
+    text-align: right;
+}
+
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(139, 139, 139) rgb(214, 214, 214);
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(139, 139, 139);
+    border-radius: 20px;
+    border: 1px solid rgb(214, 214, 214);
+  }

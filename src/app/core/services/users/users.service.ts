@@ -17,8 +17,8 @@ export class UsersService {
     return this.http.put(`${environment.apiUrl}/users/update/${id}`, user);
   }
 
-  removeUser(user: any): any {
-    return this.http.delete(`${environment.apiUrl}/users/remove/${user.id}`);
+  removeUser(userId: any): any {
+    return this.http.delete(`${environment.apiUrl}/users/remove/${userId}`);
   }
 
   findByUsername(username: string): any {

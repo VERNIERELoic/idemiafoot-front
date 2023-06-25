@@ -91,6 +91,7 @@ export class EventsComponent {
   async onTeams(eventId: any) {
     this.teams = [];
     this.teams = await firstValueFrom(this.eventsService.getTeamsByEvent(eventId));
+    timer(5000);
     this.checkTimetoConfirm(this.event.date);
   }
 
@@ -190,7 +191,6 @@ export class EventsComponent {
   async confirmDelete(id: any): Promise<void> {
     try {
       const response: any = await firstValueFrom(this.eventsService.removeEvent(id));
-
       this.nzMessageService.success('Event deleted');
       this.onEvents();
     } catch (error) {
