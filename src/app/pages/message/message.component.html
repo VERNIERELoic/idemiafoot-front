@@ -1,10 +1,17 @@
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
     <div nz-col class="gutter-row" [nzSpan]="6">
-        <div class="inner-box"></div>
+        <div class="inner-box">
+        </div>
     </div>
     <div nz-col class="gutter-row" [nzSpan]="24">
         <div class="inner-box">
             <h1>Messaging 💬</h1>
+            <div class="call">
+                <button nz-button nzType="primary" nzSearch nzShape="round"><span nz-icon nzType="video-camera"
+                        nzTheme="outline"></span></button>
+                <button nz-button nzType="primary" nzSearch nzShape="round"><span nz-icon nzType="phone"
+                        nzTheme="outline"></span></button>
+            </div>
             <div #scrollMe class="chat">
                 <nz-list nzItemLayout="horizontal">
                     <nz-list-item *ngFor="let item of messages">
@@ -13,12 +20,14 @@
                             nzDescription="{{ currentUser.username === item.username ? ('me at ' + (item.createdAt | date: 'shortTime')) : (item.username + ' at ' + (item.createdAt | date: 'shortTime')) }}">
                             <nz-list-item-meta-title>
                                 <div *ngIf="item.username != currentUser.username">
-                                    <nz-avatar nzIcon="user" nzSrc="" style="background-color:#6914c5;"></nz-avatar>
-                                    <a> {{ item.text }}</a>
+                                    <nz-avatar nzSize="small" nzIcon="user" nzSrc=""
+                                        style="background-color:#6914c5;"></nz-avatar>
+                                    <a>{{ item.text }}</a>
                                 </div>
                                 <div *ngIf="item.username == currentUser.username">
                                     <a>{{ item.text }} </a>
-                                    <nz-avatar nzIcon="user" nzSrc="" style="background-color:#344acc;"></nz-avatar>
+                                    <nz-avatar nzSize="small" nzIcon="user" nzSrc=""
+                                        style="background-color:#344acc;"></nz-avatar>
                                 </div>
                             </nz-list-item-meta-title>
                         </nz-list-item-meta>
@@ -26,14 +35,8 @@
                     <nz-list-empty *ngIf="messages.length === 0"></nz-list-empty>
                 </nz-list>
             </div>
-            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                <input type="text" nz-input placeholder="Write here" [(ngModel)]="message"
-                    (keydown.enter)="sendMsg(message);" />
-            </nz-input-group>
-            <ng-template #suffixIconButton>
-                <button nz-button nzType="primary" nzSearch><span nz-icon nzType="send" (click)="sendMsg(message);"
-                        nzTheme="outline"></span></button>
-            </ng-template>
+            <input type="text" nz-input placeholder="Write here" [(ngModel)]="message"
+                (keydown.enter)="sendMsg(message);" class="custom-input" />
             <!-- <div class="lottie-animation mt-10">
                 <ng-lottie [options]="options" (animationCreated)="onAnimate($event)"></ng-lottie>
             </div> -->

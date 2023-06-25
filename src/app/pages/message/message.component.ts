@@ -33,6 +33,11 @@ export class MessageComponent implements OnInit {
     this.socketService.listen('messageFromServer').subscribe((newMessage) => {
       this.messages.push(newMessage);
     });
+
+    this.socketService.listen('users').subscribe((users) => {
+      this.connectedUsers = users;
+      console.log('Connected:', this.connectedUsers);
+    });   
     this.scrollToBottom();
 
   }
