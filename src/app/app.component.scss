@@ -2,20 +2,31 @@
     text-align: center;
 }
 
+html {
+    scroll-behavior: smooth;
+  }
+
 .layout {
     min-height: 100vh;
 }
 
+
 .inner-box {
     background: transparent;
-    padding: 20px 0;
 }
 
 nz-content {
-    padding: 0 14px;
+    margin: auto;
     margin-top: 64px;
     font-size: large;
 }
+
+@media (max-width: 600px) {
+    nz-content {
+      margin-top: 150px;
+    }
+  }
+
 
 nz-footer {
     text-align: center;

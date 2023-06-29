@@ -1,8 +1,8 @@
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
     <div nz-col class="gutter-row" [nzSpan]="6">
-        <div class="inner-box"></div>
     </div>
     <div nz-col class="gutter-row" [nzSpan]="24">
+        <h1>Event list 📅</h1>
         <div class="btn_action">
             <button nz-button nzType="primary" (click)="showModalMiddleCreateEvent()"><span nz-icon nzType="plus"
                     nzTheme="outline"></span>Add event</button>
@@ -35,7 +35,7 @@
             <thead>
                 <tr>
                     <th><span nz-icon nzType="number" nzTheme="outline"></span></th>
-                    <th>Date time</th>
+                    <th>Date</th>
                     <th>Sport</th>
                     <th>Manage</th>
                 </tr>
@@ -50,14 +50,13 @@
                             <button nz-button nzType="primary"
                                 (click)="onPlayers(item.id);onTeams(item.id);onFreePlayers();" [disabled]="item.isPast"
                                 (click)="showModalMiddleManageTeams()"><span nz-icon nzType="vertical-align-bottom"
-                                    nzTheme="outline"></span>Join
-                                event</button>
+                                    nzTheme="outline"></span>Join event</button>
                             <!-- <nz-divider nzType="vertical"></nz-divider> -->
                             <button nz-button nzType="primary" nzDanger nz-popconfirm
                                 nzPopconfirmTitle="Are you sure delete this event ?" nzPopconfirmPlacement="bottom"
                                 (nzOnConfirm)="confirmDelete(item.id)" (nzOnCancel)="cancelDelete()"
-                                [disabled]="item.isPast">
-                                Delete <span nz-icon nzType="delete" nzTheme="outline"></span>
+                                [disabled]="item.isPast || !(currentUser.isAdmin)">
+                                Delete<span nz-icon nzType="delete" nzTheme="outline"></span>
                             </button>
                         </div>
                         <nz-modal class="modalJoin" [(nzVisible)]="isVisibleJoin" nzTitle="Match" nzCentered
@@ -100,7 +99,7 @@
             </button>
             <button nz-button nzType="primary" nzDanger nz-popconfirm
                 nzPopconfirmTitle="Are you sure to leave this match ?" nzPopconfirmPlacement="bottom"
-                (nzOnConfirm)="deletePlayerFromEvent()" (nzOnCancel)="cancelDelete()" nzShape="round">
+                (nzOnConfirm)="deletePlayerFromEvent();" (nzOnCancel)="cancelDelete()" nzShape="round">
                 <span nz-icon nzType="user-delete" nzTheme="outline"></span>
                 Leave</button>
             <button nz-button nzType="primary" [disabled]="isTimeToConfirm" (click)="confirmPlayer(selectedEventId)"
@@ -108,8 +107,8 @@
                 <span nz-icon nzType="check" nzTheme="outline"></span>confirm
             </button>
             <!-- <button nz-button nzType="primary" (click)="onPlayers(selectedEventId)">
-                            <span nz-icon nzType="reload" nzTheme="outline"></span>
-                        </button> -->
+                                <span nz-icon nzType="reload" nzTheme="outline"></span>
+                            </button> -->
             <!-- <nz-tag [nzColor]="'purple'">Teams management</nz-tag> -->
             <nz-divider nzText="Teams management"></nz-divider>
             <nz-tabset [(nzSelectedIndex)]="selectedIndex" nzType="editable-card" (nzAdd)="createTeam()"

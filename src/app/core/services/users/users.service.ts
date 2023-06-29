@@ -17,8 +17,8 @@ export class UsersService {
     return this.http.put(`${environment.apiUrl}/users/update/${id}`, user);
   }
 
-  removeUser(user: any): any {
-    return this.http.delete(`${environment.apiUrl}/users/remove/${user.id}`);
+  removeUser(userId: any): any {
+    return this.http.delete(`${environment.apiUrl}/users/remove/${userId}`);
   }
 
   findByUsername(username: string): any {
@@ -44,4 +44,8 @@ export class UsersService {
     return this.http.post(`${environment.apiUrl}/users/removeAdmin`, body);
   }
 
+  upload(userId: any, file: any): any {
+    const body = { userId, file };
+    return this.http.post(`${environment.apiUrl}/users/upload`, body);
+  }
 }

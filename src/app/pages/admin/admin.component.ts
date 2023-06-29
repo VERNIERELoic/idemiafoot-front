@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { UsersService } from '../core/services/users/users.service';
+import { UsersService } from '../../core/services/users/users.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 
 @Component({
@@ -15,8 +16,9 @@ export class AdminComponent {
   inputValue?: string;
   options: string[] = [];
   filteredUsers: any[] = [];
+  nzMessageService: any;
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService, private notificationService: NzNotificationService) {
 
   };
 
@@ -24,17 +26,15 @@ export class AdminComponent {
     this.usersService.findAll().subscribe((users: any[]) => {
       this.users = users;
       this.filteredUsers = users;
-      console.log(users);
     });
   }
+
 
   async checkSelectedUser(user: any) {
     var admin: any = await firstValueFrom(this.usersService.getUserById(user.id));
     if (admin.admin) {
-      console.log("if ok");
       await firstValueFrom(this.usersService.removeAdmin(user.id));
     } else {
-      console.log("else ok");
       await firstValueFrom(this.usersService.addAdmin(user.id));
     }
   }
@@ -48,15 +48,27 @@ export class AdminComponent {
     this.options = this.filteredUsers.map(user => user.username);
   }
 
-  async removeUser(user: { id: any; }) {
-    await firstValueFrom(this.usersService.removeUser(user.id));
+  async refreshUsers(){
+    this.users = await firstValueFrom(this.usersService.findAll());
   }
 
-  panelChange(change: { date: Date; mode: string }): void {
-    console.log(change.date, change.mode);
+  async removeUser(id: any) {
+    await firstValueFrom(this.usersService.removeUser(id))
+      .then(() => {
+        this.refreshUsers();
+        this.notificationService.success("Succes", "User deleted successfully");
+      }).catch((error) => {
+        this.notificationService.error("Error", error.message);
+      });
   }
 
-  select(date: Date): Date {
-    return date;
+
+  async switchAdmin(adminValue: any, userId: any) {
+    if (adminValue) {
+      await firstValueFrom(this.usersService.addAdmin(userId));
+    } else {
+      await firstValueFrom(this.usersService.removeAdmin(userId));
+    }
   }
+
 }

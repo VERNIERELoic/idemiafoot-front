@@ -30,6 +30,7 @@ export class EventsComponent {
   event: any;
   tabs: any = [];
   selectedIndex = 0;
+  today: any;
 
   constructor(private nzMessageService: NzMessageService,
     private fb: UntypedFormBuilder,
@@ -51,34 +52,33 @@ export class EventsComponent {
         sport: [null, [Validators.required]],
       });
       this.onEvents();
+      this.today = new Date();
       this.currentUser = await firstValueFrom(this.authService.current())
     } catch (error) {
       console.error(error);
     }
   }
 
-  onEvents() {
-    const sb = this.eventsService.getAll().subscribe((res: any) => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+  async onEvents() {
+    const res: any = await firstValueFrom(this.eventsService.getAll());
 
-      this.events = res.map((item: {
-        isPast: boolean; date: string | number | Date;
-      }) => {
-        const itemDate = new Date(item.date);
-        itemDate.setHours(0, 0, 0, 0);
+    this.today.setHours(0, 0, 0, 0);
 
-        item.isPast = itemDate < today;
+    this.events = res.map((item: {
+      isPast: boolean; date: string | number | Date;
+    }) => {
+      const itemDate = new Date(item.date);
+      itemDate.setHours(0, 0, 0, 0);
 
-        return item;
-      });
+      item.isPast = itemDate < this.today;
 
-      this.events.sort((a: { date: string | number | Date; }, b: { date: string | number | Date; }) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
-        return dateB.getTime() - dateA.getTime();
-      });
-      sb.unsubscribe();
+      return item;
+    });
+
+    this.events.sort((a: { date: string | number | Date; }, b: { date: string | number | Date; }) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB.getTime() - dateA.getTime();
     });
   }
 
@@ -86,11 +86,13 @@ export class EventsComponent {
     this.selectedEventId = eventId;
     this.players = await firstValueFrom(this.eventsService.getUserEventPlayers(eventId));
     this.event = await firstValueFrom(this.eventsService.getEvent(eventId));
-    this.checkTimetoConfirm(this.event.date);
   }
 
   async onTeams(eventId: any) {
+    this.teams = [];
     this.teams = await firstValueFrom(this.eventsService.getTeamsByEvent(eventId));
+    timer(5000);
+    this.checkTimetoConfirm(this.event.date);
   }
 
   // onTeamPlayers(index: any) {
@@ -113,9 +115,8 @@ export class EventsComponent {
   }
 
   async onFreePlayers() {
-    this.eventsService.getFreePlayers(this.selectedEventId).subscribe((response: any) => {
-      this.freePlayers = response;
-    });
+    this.freePlayers = [];
+    this.freePlayers = await firstValueFrom(this.eventsService.getFreePlayers(this.selectedEventId));
   }
 
   async submitForm() {
@@ -186,17 +187,16 @@ export class EventsComponent {
     this.nzMessageService.info('Cancel');
   }
 
-  confirmDelete(id: any): void {
-    this.eventsService.removeEvent(id).subscribe({
-      next: (response: any) => {
-        this.nzMessageService.success('Event deleted');
-        this.onEvents();
-      },
-      error: (error: any) => {
-        this.nzMessageService.error('Error deleting event');
-        console.log(error);
-      }
-    });
+
+  async confirmDelete(id: any): Promise<void> {
+    try {
+      const response: any = await firstValueFrom(this.eventsService.removeEvent(id));
+      this.nzMessageService.success('Event deleted');
+      this.onEvents();
+    } catch (error) {
+      this.nzMessageService.error('Error deleting event');
+      console.log(error);
+    }
   }
 
   async confirmPlayer(eventId: any) {
@@ -218,7 +218,8 @@ export class EventsComponent {
     if (timeUntilEvent > 0) {
       const source = timer(timeUntilEvent);
       source.subscribe(() => {
-        this.isTimeToConfirm = false;
+        this.isTimeToConfirm = true;
+        console.log(this.isTimeToConfirm);
       });
     } else {
       this.isTimeToConfirm = false;

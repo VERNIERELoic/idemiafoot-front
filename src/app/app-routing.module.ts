@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
-import { ChatComponent } from './pages/chat/chat.component';
-import { EventsComponent } from './pages/events/events.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AdminGuard } from './core/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -30,20 +29,20 @@ const routes: Routes = [
 
   {
     path: 'events',
-    component: EventsComponent,
-    canActivate: [AuthGuard]
-  },
-
-  {
-    path: 'chat',
-    component: ChatComponent,
+    loadChildren: () => import('./pages/events/events.module').then(m => m.EventsModule),
     canActivate: [AuthGuard]
   },
 
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-    canActivate : [AuthGuard]
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard, AdminGuard]
+  },
+
+  {
+    path: 'message',
+    loadChildren: () => import('./pages/message/message.module').then(m => m.MessageModule),
+    canActivate: [AuthGuard]
   },
 ];
 
