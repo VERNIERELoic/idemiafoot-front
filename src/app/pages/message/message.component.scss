@@ -9,11 +9,15 @@ nz-spin {
 
 .call button {
     margin-left: 2px;
+    margin-bottom: 10px;
     display: inline-block;
 }
 
 .chat {
+    border-radius: 10px;
+    // border: rgb(233, 233, 233) solid ;
     max-height: 450px;
+    width: 500px;
     margin: auto;
     overflow: auto;
 }
@@ -28,6 +32,7 @@ nz-spin {
 
 .custom-input {
     border-radius: 20px;
+    width: 500px;
 }
 
 .custom-template {

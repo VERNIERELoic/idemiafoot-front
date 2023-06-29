@@ -44,4 +44,8 @@ export class UsersService {
     return this.http.post(`${environment.apiUrl}/users/removeAdmin`, body);
   }
 
+  upload(userId: any, file: any): any {
+    const body = { userId, file };
+    return this.http.post(`${environment.apiUrl}/users/upload`, body);
+  }
 }
