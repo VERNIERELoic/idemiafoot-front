@@ -10,7 +10,7 @@ import { AnimationOptions } from 'ngx-lottie';
 export class HomeComponent {
 
   options: AnimationOptions = {
-    path: '/assets/lottie/soccer-field.json'
+    path: 'assets/lottie/soccer-field.json'
   };
   onAnimate(animationItem: AnimationItem): void {
     console.log(animationItem);
