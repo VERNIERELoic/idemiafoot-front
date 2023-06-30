@@ -13,7 +13,7 @@ export class SocketService {
   private socket;
 
   constructor(private http: HttpClient) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io(environment.apiUrl);
   }
 
   listen(eventName: string): Observable<any> {
