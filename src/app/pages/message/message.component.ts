@@ -37,7 +37,7 @@ export class MessageComponent implements OnInit {
     this.socketService.listen('users').subscribe((users) => {
       this.connectedUsers = users;
       console.log('Connected:', this.connectedUsers);
-    });   
+    });
     this.scrollToBottom();
 
   }
@@ -52,7 +52,11 @@ export class MessageComponent implements OnInit {
 
   async onMessage() {
     this.messages = await this.socketService.findAll().toPromise();
+    this.messages.sort((a: { createdAt: string | number | Date; }, b: { createdAt: string | number | Date; }) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
   }
+
+
+
 
   options: AnimationOptions = {
     path: '/assets/lottie/coming-soon.json',

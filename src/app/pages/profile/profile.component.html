@@ -7,12 +7,15 @@
             <h1 class="title">Update your profile</h1>
             <form nz-form [formGroup]="validateForm">
                 <nz-form-item>
-                    <div class="clearfix">
-                        <nz-upload nzListType="picture-card" [nzPreview]="handlePreview">
-                            <div>
-                                <span nz-icon nzType="plus"></span>
-                                <div style="margin-top: 8px">Upload</div>
-                            </div>
+                    <div class="upload">
+                        <nz-upload class="avatar-uploader" nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                            nzName="avatar" nzListType="picture-card" [nzShowUploadList]="false"
+                            [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
+                            <ng-container *ngIf="!avatarUrl">
+                                <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                                <div class="ant-upload-text">Upload</div>
+                            </ng-container>
+                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
                         </nz-upload>
                     </div>
                 </nz-form-item>
@@ -74,13 +77,11 @@
                         number</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phone']"
                         nzErrorTip="Please input your phone number!">
-
                         <input formControlName="phone" id="'phone'" nz-input [(ngModel)]="currentUser.phone" />
-
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item nz-row class="register-area">
-                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                    <nz-form-control>
                         <button nz-button nzType="primary" (click)="update()" nzShape="round">Update</button>
                         <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm()" nzDanger
                             nzShape="round"><span nz-icon nzType="delete" nzTheme="outline"></span>Delete my

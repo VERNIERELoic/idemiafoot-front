@@ -26,8 +26,27 @@ nz-spin {
     text-align: left;
 }
 
+.left-align-content a{
+    background-color: #8d8d8d;
+    color: white;
+    border-radius: 15px;
+    margin-left: 3px;
+    padding: 8px;
+    word-wrap: break-word; /* Add this line */
+
+}
+
 .right-align-content {
     text-align: right;
+}
+
+.right-align-content a{
+    background-color: #387dec;
+    color: white;
+    border-radius: 15px;
+    margin-right: 3px;
+    padding: 7px;
+    word-wrap: break-word; /* Add this line */
 }
 
 .custom-input {

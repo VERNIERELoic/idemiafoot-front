@@ -29,12 +29,11 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 
-// Add these two
+
 import { LottieModule } from 'ngx-lottie';
-import player from 'lottie-web';
-
-// Export this function
 export function playerFactory(): any {  
   return import('lottie-web');
 }
@@ -73,6 +72,8 @@ registerLocaleData(en);
     NzTableModule,
     NzPopconfirmModule,
     LottieModule.forRoot({ player: playerFactory }), 
+    NzModalModule,
+    NzMessageModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

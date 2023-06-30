@@ -1,12 +1,8 @@
-.title {
-    text-align: center;
-}
-
 [nz-form] {
     max-width: 600px;
 }
 
-.clearfix {
+.upload {
     margin-right: auto;
     margin-left: auto;
 }
@@ -15,12 +11,8 @@
     width: 70px;
 }
 
-.register-are {
+.register-area  button{
+    justify-content: space-between;
+    margin-left: 5px;
     margin-bottom: 8px;
-}
-
-form {
-    padding-top: 1%;
-    margin: 0 auto;
-    font-size: large;
 }
