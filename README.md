@@ -1,6 +1,6 @@
 # Idemia football events
 ## 📺 Demo
-<img src="src/assets/readme/demo.gif" width="150px">
+<img src="src/assets/readme/demo.gif" width="350px">
 
 
 # 💻 Tech Stack:
