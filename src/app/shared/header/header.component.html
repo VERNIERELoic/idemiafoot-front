@@ -4,7 +4,7 @@
         <li style="background-color: transparent; color: rgb(67, 0, 153);" nz-menu-item routerLink='/'>Home</li>
         <li style="background-color: transparent; color: rgb(67, 0, 153);" nz-menu-item routerLink='/events'>Events</li>
         <li style="background-color: transparent; color: rgb(67, 0, 153);" nz-menu-item routerLink='/message'>Messages</li>
-        <li *ngIf="(isAdmin)" style="background-color: transparent; color: rgb(67, 0, 153);" nz-menu-item routerLink='/admin'>Admin</li>
+        <li *ngIf="(isAdmin)" style="background-color: transparent; color: rgb(67, 0, 153);" nz-menu-item routerLink='/admin'>Admin </li>
         <button *ngIf="!(isLoggedIn | async)" routerLink='/register' nz-button nzType="primary" nzShape="round"><span
                 nz-icon nzType="user-add" nzTheme="outline"></span>register</button>
         <button *ngIf="!(isLoggedIn | async)" routerLink='/login' nz-button nzType="primary" nzShape="round"><span

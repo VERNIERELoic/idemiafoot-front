@@ -21,6 +21,8 @@
                                     <nz-select id="sport" formControlName="sport" nzPlaceHolder="Select a sport">
                                         <nz-option nzValue="Foot" nzLabel="Foot"></nz-option>
                                         <nz-option nzValue="Pool" nzLabel="Pool"></nz-option>
+                                        <nz-option nzValue="Paddel" nzLabel="Paddel"></nz-option>
+                                        <nz-option nzValue="Basket" nzLabel="Basket"></nz-option>
                                     </nz-select>
                                 </nz-form-item>
                             </nz-form-control>
@@ -43,7 +45,7 @@
             <tbody>
                 <tr *ngFor="let item of events" [ngClass]="{'past-event': item.isPast}">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.date|date:"medium" }}</td>
+                    <td>{{ item.date|date:"fullDate" }}</td>
                     <td>{{ item.sport }}</td>
                     <td>
                         <div class="btn_tab">

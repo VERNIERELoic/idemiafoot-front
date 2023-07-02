@@ -49,48 +49,48 @@ export class ProfileComponent implements OnInit {
 
 
   beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
-  new Observable((observer: Observer<boolean>) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-      this.msg.error('You can only upload JPG file!');
+    new Observable((observer: Observer<boolean>) => {
+      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isJpgOrPng) {
+        this.msg.error('You can only upload JPG file!');
+        observer.complete();
+        return;
+      }
+      const isLt2M = file.size! / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.msg.error('Image must smaller than 2MB!');
+        observer.complete();
+        return;
+      }
+      observer.next(isJpgOrPng && isLt2M);
       observer.complete();
-      return;
-    }
-    const isLt2M = file.size! / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      this.msg.error('Image must smaller than 2MB!');
-      observer.complete();
-      return;
-    }
-    observer.next(isJpgOrPng && isLt2M);
-    observer.complete();
-  });
+    });
 
-private getBase64(img: File, callback: (img: string) => void): void {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result!.toString()));
-  reader.readAsDataURL(img);
-}
-
-async handleChange(info: { file: NzUploadFile }): Promise<void> {
-  switch (info.file.status) {
-    case 'uploading':
-      this.loading = true;
-      break;
-    case 'done':
-      // Get this url from response in real world.
-      this.getBase64(info.file!.originFileObj!, async (img: string) => {
-        this.loading = false;
-        this.avatarUrl = img;
-        await firstValueFrom(this.userService.upload(img, this.currentUser.id));
-      });
-      break;
-    case 'error':
-      this.msg.error('Network error');
-      this.loading = false;
-      break;
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
   }
-}
+
+  async handleChange(info: { file: NzUploadFile }): Promise<void> {
+    switch (info.file.status) {
+      case 'uploading':
+        this.loading = true;
+        break;
+      case 'done':
+        this.loading = false;
+        await firstValueFrom(this.userService.upload(info.file!.originFileObj!, this.currentUser.id));
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.avatarUrl = img;
+        });
+        break;
+      case 'error':
+        this.msg.error('Network error');
+        this.loading = false;
+        break;
+    }
+  }
+
 
   async update() {
     const user: any = await this.userService.updateUser(this.currentUser.id, this.validateForm.value)
@@ -101,7 +101,7 @@ async handleChange(info: { file: NzUploadFile }): Promise<void> {
       }).catch(() => {
         this.notificationService.error("Error", "Profile update failed");
       });
-      
+
   }
 
   updateConfirmValidator(): void {
@@ -162,7 +162,7 @@ async handleChange(info: { file: NzUploadFile }): Promise<void> {
             })
           )
           .subscribe(
-            () => {},
+            () => { },
             (error: any) => {
               this.notificationService.error("Error", error.message);
               console.log(error);

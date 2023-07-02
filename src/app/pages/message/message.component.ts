@@ -17,6 +17,7 @@ export class MessageComponent implements OnInit {
   messages: any = []
   currentUser: any;
   connectedUsers: any = [];
+  color: any;
   private userSubscription?: Subscription;
   @ViewChild('scrollMe') private myScrollContainer: ElementRef | undefined;
 
@@ -39,12 +40,12 @@ export class MessageComponent implements OnInit {
       console.log('Connected:', this.connectedUsers);
     });
     this.scrollToBottom();
-
+    this.color = this.generateRandomColor();
   }
 
   sendMsg(message: any) {
     if (message) {
-      this.socketService.emit('message', { username: this.currentUser.username, text: message });
+      this.socketService.emit('message', { avatar: this.currentUser.avatar, username: this.currentUser.username, text: message });
       this.message = '';
     }
   }
@@ -82,4 +83,13 @@ export class MessageComponent implements OnInit {
       }
     } catch (err) { }
   }
+
+  generateRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 }

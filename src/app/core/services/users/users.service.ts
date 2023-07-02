@@ -44,9 +44,11 @@ export class UsersService {
     return this.http.post(`${environment.apiUrl}/users/removeAdmin`, body);
   }
 
-  upload(avatar: any, userId: any): any {
-    const body = { avatar, userId };
-    console.log(avatar);
-    return this.http.post(`${environment.apiUrl}/users/upload`, body);
+  upload(avatar: File, userId: any): any {
+    const formData = new FormData();
+    formData.append('image', avatar, avatar.name);
+
+    return this.http.post(`${environment.apiUrl}/file-upload/${userId}/single`, formData);
   }
+
 }

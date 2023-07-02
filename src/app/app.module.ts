@@ -31,7 +31,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
-
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 
 import { LottieModule } from 'ngx-lottie';
 export function playerFactory(): any {  
@@ -74,6 +74,7 @@ registerLocaleData(en);
     LottieModule.forRoot({ player: playerFactory }), 
     NzModalModule,
     NzMessageModule,
+    NzTimelineModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

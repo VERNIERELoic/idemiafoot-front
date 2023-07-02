@@ -15,7 +15,7 @@
                                 <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
                                 <div class="ant-upload-text">Upload</div>
                             </ng-container>
-                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+                            <img *ngIf="avatarUrl" [src]="'http://' + avatarUrl" style="width: 100%" />
                         </nz-upload>
                     </div>
                 </nz-form-item>
