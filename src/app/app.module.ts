@@ -30,10 +30,11 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 
 import { LottieModule } from 'ngx-lottie';
+import { ForgotComponent } from './pages/forgot/forgot.component';
 export function playerFactory(): any {  
   return import('lottie-web');
 }
@@ -49,6 +50,7 @@ registerLocaleData(en);
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    ForgotComponent,
 
   ],
   imports: [

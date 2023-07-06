@@ -45,19 +45,16 @@ export class MessageComponent implements OnInit {
 
   sendMsg(message: any) {
     if (message) {
-      this.socketService.emit('message', { avatar: this.currentUser.avatar, username: this.currentUser.username, text: message });
+      this.socketService.emit('message', { user: this.currentUser, text: message });
       this.message = '';
     }
   }
 
-
   async onMessage() {
     this.messages = await this.socketService.findAll().toPromise();
     this.messages.sort((a: { createdAt: string | number | Date; }, b: { createdAt: string | number | Date; }) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    console.log(this.messages)
   }
-
-
-
 
   options: AnimationOptions = {
     path: '/assets/lottie/coming-soon.json',

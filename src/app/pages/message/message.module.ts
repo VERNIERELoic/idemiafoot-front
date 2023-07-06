@@ -13,6 +13,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzIconModule,
     NzAvatarModule,
     NzButtonModule,
+    NzCardModule,
   ]
 })
 export class MessageModule { }

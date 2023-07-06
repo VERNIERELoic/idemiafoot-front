@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AdminGuard } from './core/guards/admin.guard';
+import { ForgotComponent } from './pages/forgot/forgot.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,10 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
-
+  {
+    path: 'forgot',
+    component: ForgotComponent
+  },
   {
     path: 'profile',
     component: ProfileComponent,

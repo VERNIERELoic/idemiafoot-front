@@ -16,25 +16,25 @@
                 <nz-list nzItemLayout="horizontal">
                     <nz-list-item *ngFor="let item of messages">
                         <nz-list-item-meta
-                            [ngClass]="{'right-align-content': currentUser.username === item.username, 'left-align-content': currentUser.username !== item.username}"
-                            nzDescription="{{ currentUser.username === item.username ? ('me at ' + (item.createdAt | date: 'shortTime')) : (item.username + ' at ' + (item.createdAt | date: 'shortTime')) }}">
+                            [ngClass]="{'right-align-content': currentUser.username === item.user.username, 'left-align-content': currentUser.username !== item.user.username}"
+                            nzDescription="{{ currentUser.username === item.user.username ? ('me at ' + (item.createdAt | date: 'shortTime')) : (item.user.username + ' at ' + (item.createdAt | date: 'shortTime')) }}">
                             <nz-list-item-meta-title>
-                                <div *ngIf="item.username != currentUser.username">
-                                    <nz-avatar *ngIf="item.avatar; else textAvatar" [nzSrc]="'http://' + item.avatar"
+                                <div *ngIf="item.user.username != currentUser.username">
+                                    <nz-avatar *ngIf="item.user.avatar; else textAvatar" [nzSrc]="'http://' + item.user.avatar"
                                         nzSize="small" style="vertical-align: middle;"></nz-avatar>
                                     <ng-template #textAvatar>
-                                        <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="item.username"
+                                        <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="item.user.username"
                                             nzSize="small" style="vertical-align: middle;"></nz-avatar>
                                     </ng-template>
                                     <a> {{ item.text }}</a>
                                 </div>
-                                <div *ngIf="item.username == currentUser.username">
+                                <div *ngIf="item.user.username == currentUser.username">
                                     <a>{{ item.text }} </a>
 
                                         <nz-avatar *ngIf="currentUser.avatar; else textAvatar" [nzSrc]="'http://' + currentUser.avatar"
                                         nzSize="small" style="vertical-align: middle;"></nz-avatar>
                                     <ng-template #textAvatar>
-                                        <nz-avatar [nzText]="item.username"
+                                        <nz-avatar [nzText]="item.user.username"
                                             nzSize="small" style="background-color:#3464cc;"></nz-avatar>
                                     </ng-template>
                                 </div>
