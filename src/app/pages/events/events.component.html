@@ -123,7 +123,7 @@
                         <nz-option *ngFor="let player of freePlayers" [nzLabel]="player.username + ' (Free)'"
                             [nzValue]="player"></nz-option>
                         <nz-option *ngFor="let player of teamPlayers" [nzHide]="true"
-                            [nzLabel]="player.username + ' (Assigned to n°' + (i+1) + ')'"
+                            [nzLabel]="player.username"
                             [nzValue]="player"></nz-option>
                     </nz-select>
                 </nz-tab>
