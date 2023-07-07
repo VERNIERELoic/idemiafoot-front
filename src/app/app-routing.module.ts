@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NbChatComponent } from '@nebular/theme';
 import { AuthGuard } from './core/guards/auth.guard';
-import { ChatComponent } from './pages/chat/chat.component';
-import { EventsComponent } from './pages/events/events.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AdminGuard } from './core/guards/admin.guard';
+import { ForgotComponent } from './pages/forgot/forgot.component';
 
 const routes: Routes = [
   {
@@ -22,20 +21,32 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
-
-  { path: 'profile', 
-    component: ProfileComponent, 
-    canActivate: [AuthGuard] 
+  {
+    path: 'forgot',
+    component: ForgotComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
 
-  { path: 'events', 
-  component: EventsComponent, 
-  canActivate: [AuthGuard] 
+  {
+    path: 'events',
+    loadChildren: () => import('./pages/events/events.module').then(m => m.EventsModule),
+    canActivate: [AuthGuard]
   },
 
-  { path: 'chat', 
-    component: ChatComponent, 
-    canActivate: [AuthGuard] 
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard, AdminGuard]
+  },
+
+  {
+    path: 'message',
+    loadChildren: () => import('./pages/message/message.module').then(m => m.MessageModule),
+    canActivate: [AuthGuard]
   },
 ];
 

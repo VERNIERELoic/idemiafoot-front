@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page Not Found</title>
+</head>
+<body>
+    <script>
+    // Similar redirection as the index.html history hack
+    sessionStorage.redirect = location.href;
+    </script>
+    <meta http-equiv="refresh" content="0;URL='/'"></meta>
+</body>
+</html>

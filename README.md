@@ -1,28 +1,39 @@
-# IdemiafootFront
+# Idemia football events
+## 📺 Demo
+<img src="src/assets/readme/demo.gif" width="350px">
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.5.
 
-## Development server
+# 💻 Tech Stack:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white) ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
+![Ant-Design](https://img.shields.io/badge/-AntDesign-%230170FE?style=for-the-badge&logo=ant-design&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Ant-Design](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white)
 
-## Code scaffolding
+# 🚀 Run
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. ### Clone repository
 
-## Build
+```bash
+git clone https://github.com/VERNIERELoic/idemiafoot-front.git
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. ### Install dependencies
 
-## Running unit tests
+```bash
+cd idemiafoot-front
+npm install
+```
+3. ### Run
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+ng serve --configuration development # or production
+```
 
-## Running end-to-end tests
+# 🛠️ Build
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+ng serve --configuration production
+```
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# idemiafoot-front
+

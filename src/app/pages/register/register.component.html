@@ -1,13 +1,14 @@
-<html>
-
-<body>
-    <app-header></app-header>
-    <nz-layout class="layout">
-        <nz-content>
-            <h1 class="title" >Register form</h1>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div nz-col class="gutter-row" [nzSpan]="5">
+        <div class="inner-box"></div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="23">
+        <div class="inner-box">
             <form nz-form [formGroup]="validateForm">
+                <h1 class="title">Create an account</h1>
                 <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" nzRequired nzTooltipTitle="must have to be unic !">
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" nzRequired
+                        nzTooltipTitle="must have to be unic !">
                         <span>Username</span>
                     </nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Pleaser enter username!">
@@ -58,7 +59,8 @@
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone number</nz-form-label>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone
+                        number</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phone']"
                         nzErrorTip="Please input your phone number!">
 
@@ -73,9 +75,9 @@
                     </nz-form-control>
                 </nz-form-item>
             </form>
-        </nz-content>
-        <app-footer></app-footer>
-    </nz-layout>
-</body>
-
-</html>
+        </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="5">
+        <div class="inner-box"></div>
+    </div>
+</div>

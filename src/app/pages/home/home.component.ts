@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AnimationItem } from 'lottie-web';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  options: AnimationOptions = {
+    path: 'assets/lottie/soccer-field.json'
+  };
+  onAnimate(animationItem: AnimationItem): void {
+    console.log(animationItem);
+  }
 }

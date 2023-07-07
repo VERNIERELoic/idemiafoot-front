@@ -1,36 +1,18 @@
 .logo {
-    width: 100px;
-    height: 30px;
-    margin: 16px 24px 16px 0;
+    width: auto;
+    height: 32px;
+    margin: 16px 10px 10px 0;
     float: left;
     background-color: transparent;
 }
 
-nz-badge {
-    margin-right: 20px;
-}
-
-.head-example {
-    width: 42px;
-    height: 42px;
-    border-radius: 4px;
-    background: #eee;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-nz-avatar {
-    margin-right: 10%;
-}
-
 nz-header {
-    position: fixed;
+    position: absolute;
     width: 100%;
     background-color: transparent;
 }
 
 .ant-menu-item {
-    color: rgba(24, 144, 255, 0.65);
     font-size: medium;
 }
 

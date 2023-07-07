@@ -1,18 +1,21 @@
-<html>
-
-<body>
-    <app-header></app-header>
-    <nz-layout class="layout">
-        <nz-content>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div nz-col class="gutter-row" [nzSpan]="6">
+        <div class="inner-box"></div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="24">
+        <div class="inner-box">
             <h1 class="title">Update your profile</h1>
             <form nz-form [formGroup]="validateForm">
                 <nz-form-item>
-                    <div class="clearfix">
-                        <nz-upload nzListType="picture-card" [nzPreview]="handlePreview">
-                            <div>
-                                <span nz-icon nzType="plus"></span>
-                                <div style="margin-top: 8px">Upload</div>
-                            </div>
+                    <div class="upload">
+                        <nz-upload class="avatar-uploader" nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                            nzName="avatar" nzListType="picture-card" [nzShowUploadList]="false"
+                            [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
+                            <ng-container *ngIf="!avatarUrl">
+                                <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                                <div class="ant-upload-text">Upload</div>
+                            </ng-container>
+                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
                         </nz-upload>
                     </div>
                 </nz-form-item>
@@ -22,7 +25,7 @@
                         <span>Username</span>
                     </nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Pleaser enter username!">
-                        <input nz-input id="username" formControlName="username" />
+                        <input nz-input formControlName="username" id="username" [(ngModel)]="currentUser.username" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
@@ -30,7 +33,8 @@
                         <span>First name</span>
                     </nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter your first name!">
-                        <input nz-input id="firstname" formControlName="firstname" />
+                        <input nz-input id="firstname" formControlName="firstname"
+                            [(ngModel)]="currentUser.firstname" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
@@ -38,13 +42,13 @@
                         <span>Last name</span>
                     </nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter your last name!">
-                        <input nz-input id="lastname" formControlName="lastname" />
+                        <input nz-input id="lastname" formControlName="lastname" [(ngModel)]="currentUser.lastname" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Invalide email!">
-                        <input nz-input formControlName="email" id="email" />
+                        <input nz-input formControlName="email" id="email" [(ngModel)]="currentUser.email" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
@@ -69,26 +73,25 @@
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone number</nz-form-label>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>Phone
+                        number</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phone']"
                         nzErrorTip="Please input your phone number!">
-
-                        <input formControlName="phone" id="'phone'" nz-input />
-
+                        <input formControlName="phone" id="'phone'" nz-input [(ngModel)]="currentUser.phone" />
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item nz-row class="register-area">
-                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                        <button nz-button nzType="primary" (click)="showConfirm()" nzShape="round">Update</button>
+                    <nz-form-control>
+                        <button nz-button nzType="primary" (click)="update()" nzShape="round">Update</button>
                         <button nz-button nzType="primary" nzDanger (click)="showDeleteConfirm()" nzDanger
                             nzShape="round"><span nz-icon nzType="delete" nzTheme="outline"></span>Delete my
                             account</button>
                     </nz-form-control>
                 </nz-form-item>
             </form>
-        </nz-content>
-        <app-footer></app-footer>
-    </nz-layout>
-</body>
-
-</html>
+        </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="6">
+        <div class="inner-box"></div>
+    </div>
+</div>

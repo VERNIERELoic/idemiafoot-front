@@ -1,0 +1,81 @@
+nz-spin {
+    margin-top: 10%;
+}
+
+// .lottie-animation {
+//     margin: auto;
+//     width: 50%;
+// }
+
+.call button {
+    margin-left: 2px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.chat {
+    border-radius: 10px;
+    // border: rgb(233, 233, 233) solid ;
+    max-height: 450px;
+    width: 500px;
+    margin: auto;
+    overflow: auto;
+}
+
+.left-align-content {
+    text-align: left;
+}
+
+.left-align-content a{
+    background-color: #8d8d8d;
+    color: white;
+    border-radius: 15px;
+    margin-left: 3px;
+    padding: 8px;
+    word-wrap: break-word; /* Add this line */
+
+}
+
+.right-align-content {
+    text-align: right;
+}
+
+.right-align-content a{
+    background-color: #387dec;
+    color: white;
+    border-radius: 15px;
+    margin-right: 3px;
+    padding: 7px;
+    word-wrap: break-word; /* Add this line */
+}
+
+.custom-input {
+    border-radius: 20px;
+    width: 500px;
+}
+
+.custom-template {
+    border-radius: 20px;
+}
+
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(139, 139, 139) rgb(214, 214, 214);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(139, 139, 139);
+    border-radius: 20px;
+    border: 1px solid rgb(214, 214, 214);
+}

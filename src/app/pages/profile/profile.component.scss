@@ -1,12 +1,8 @@
-.title {
-    text-align: center;
-}
-
 [nz-form] {
     max-width: 600px;
 }
 
-.clearfix {
+.upload {
     margin-right: auto;
     margin-left: auto;
 }
@@ -15,39 +11,8 @@
     width: 70px;
 }
 
-.register-are {
+.register-area  button{
+    justify-content: space-between;
+    margin-left: 5px;
     margin-bottom: 8px;
-}
-
-form {
-    padding-top: 5%;
-    margin: 0 auto;
-}
-
-.layout {
-    min-height: 100vh;
-}
-
-nz-content {
-    padding: 0 50px;
-    margin-top: 10%;
-}
-
-nz-breadcrumb {
-    margin: 16px 0;
-}
-
-.inner-content {
-    background: transparent;
-    padding: 24px;
-    min-height: 380px;
-}
-
-:host ::ng-deep .avatar-uploader>.ant-upload {
-    width: 128px;
-    height: 128px;
-}
-
-button {
-    margin: 2%;
 }

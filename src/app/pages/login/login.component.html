@@ -1,8 +1,9 @@
-<html>
-<body>
-  <app-header></app-header>
-  <nz-layout class="layout">
-    <nz-content>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col class="gutter-row" [nzSpan]="6">
+    <div class="inner-box"></div>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="24">
+    <div class="inner-box">
       <form nz-form [formGroup]="validateForm" class="login-form">
         <nz-form-item>
           <nz-form-control nzErrorTip="Invalid username !">
@@ -20,7 +21,7 @@
         </nz-form-item>
         <div nz-row class="login-form-margin">
           <div nz-col [nzSpan]="12">
-            <a class="login-form-forgot">Recover password</a>
+            <a routerLink="/forgot" class="login-form-forgot">Recover password</a>
           </div>
         </div>
         <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="login()"
@@ -28,9 +29,9 @@
         Or
         <a routerLink="/register">Register</a>
       </form>
-    </nz-content>
-    <app-footer></app-footer>
-  </nz-layout>
-</body>
-
-</html>
+    </div>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="6">
+    <div class="inner-box"></div>
+  </div>
+</div>
