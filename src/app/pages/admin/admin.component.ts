@@ -88,7 +88,6 @@ export class AdminComponent {
     }
     await this.refreshUsers();
   }
-  
 
   onCurrentPageDataChange(listOfCurrentPageData: readonly Data[]): void {
     this.listOfCurrentPageData = listOfCurrentPageData;

@@ -5,6 +5,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { firstValueFrom, interval, Subscription, timer } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'app-events',
@@ -31,8 +32,8 @@ export class EventsComponent {
   tabs: any = [];
   selectedIndex = 0;
   today: any;
-  page = 1;
-  pageSize = 10;
+  listOfCurrentPageData: readonly Data[] = [];
+  pageSize: any | undefined;
 
   constructor(private nzMessageService: NzMessageService,
     private fb: UntypedFormBuilder,
@@ -269,5 +270,9 @@ export class EventsComponent {
   newTab(): void {
     this.tabs.push('Team ' + this.tabs.length);
     this.selectedIndex = this.tabs.length;
+  }
+
+  onCurrentPageDataChange(listOfCurrentPageData: readonly Data[]): void {
+    this.listOfCurrentPageData = listOfCurrentPageData;
   }
 }

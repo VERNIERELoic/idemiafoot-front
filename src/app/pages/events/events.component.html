@@ -33,7 +33,8 @@
             <button nz-button nzType="primary" (click)="refresh()"><span nz-icon nzType="reload"
                     nzTheme="outline"></span></button>
         </div>
-        <nz-table #basicTable [nzData]="events">
+        <nz-table #basicTable [nzData]="events" nzShowPagination [nzPageSize]="7"
+            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" (nzPageIndexChange)="refresh()">
             <thead>
                 <tr>
                     <th><span nz-icon nzType="number" nzTheme="outline"></span></th>
@@ -43,21 +44,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of events" [ngClass]="{'past-event': item.isPast}">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.date|date:"fullDate" }}</td>
-                    <td>{{ item.sport }}</td>
+                <tr *ngFor="let item of listOfCurrentPageData" [ngClass]="{'past-event': item['isPast']}">
+                    <td>{{ item['id'] }}</td>
+                    <td>{{ item['date'] | date:"fullDate" }}</td>
+                    <td>{{ item['sport'] }}</td>
                     <td>
                         <div class="btn_tab">
                             <button nz-button nzType="primary"
-                                (click)="onPlayers(item.id);onTeams(item.id);onFreePlayers();" [disabled]="item.isPast"
+                                (click)="onPlayers(item['id']);onTeams(item['id']);onFreePlayers();" [disabled]="item['isPast']"
                                 (click)="showModalMiddleManageTeams()"><span nz-icon nzType="vertical-align-bottom"
                                     nzTheme="outline"></span>Join event</button>
                             <!-- <nz-divider nzType="vertical"></nz-divider> -->
                             <button nz-button nzType="primary" nzDanger nz-popconfirm
                                 nzPopconfirmTitle="Are you sure delete this event ?" nzPopconfirmPlacement="bottom"
-                                (nzOnConfirm)="confirmDelete(item.id)" (nzOnCancel)="cancelDelete()"
-                                [disabled]="item.isPast || !(currentUser.isAdmin)">
+                                (nzOnConfirm)="confirmDelete(item['id'])" (nzOnCancel)="cancelDelete()"
+                                [disabled]="item['isPast'] || !(currentUser.isAdmin)">
                                 Delete<span nz-icon nzType="delete" nzTheme="outline"></span>
                             </button>
                         </div>
@@ -68,7 +69,7 @@
                                     <nz-form-item class="flex-container">
                                         <!-- <nz-tag [nzColor]="'purple'">Player management</nz-tag> -->
                                         <nz-divider nzText="Players management"></nz-divider>
-                                        <nz-table class="flex-item" #basicTable [nzData]="players" [nzScroll]="{ y: '250px' }">
+                                        <nz-table class="flex-item" #basicTable [nzScroll]="{ y: '250px' }">
                                             <thead>
                                                 <tr>
                                                     <th>Positions</th>
@@ -121,8 +122,7 @@
                         [nzLoading]="true" [nzSelectOnTab]="true">
                         <nz-option *ngFor="let player of freePlayers" [nzLabel]="player.username + ' (Free)'"
                             [nzValue]="player"></nz-option>
-                        <nz-option *ngFor="let player of teamPlayers" [nzHide]="true"
-                            [nzLabel]="player.username"
+                        <nz-option *ngFor="let player of teamPlayers" [nzHide]="true" [nzLabel]="player.username"
                             [nzValue]="player"></nz-option>
                     </nz-select>
                 </nz-tab>
