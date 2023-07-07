@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkidemiafoot_front=self.webpackChunkidemiafoot_front||[]).push([[962],{2962:(E,d,a)=>{a.d(d,{vh:()=>O});var r=a(5879),c=a(6994),l=a(6814),p=a(8324);let O=(()=>{class t{}return t.\u0275fac=function(e){return new(e||t)},t.\u0275mod=r.oAB({type:t}),t.\u0275inj=r.cJS({imports:[l.ez,p.T,c.vT]}),t})()}}]);
