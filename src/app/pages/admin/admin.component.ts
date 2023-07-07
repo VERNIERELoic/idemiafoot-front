@@ -93,4 +93,13 @@ export class AdminComponent {
     this.listOfCurrentPageData = listOfCurrentPageData;
   }
 
+  cancelDelete(): void {
+    this.nzMessageService.info('Cancel');
+  }
+
+
+  async confirmDelete(id: any): Promise<void> {
+    this.handleRemoveUser(id);
+  }
+
 }

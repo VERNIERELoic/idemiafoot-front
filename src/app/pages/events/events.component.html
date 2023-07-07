@@ -4,7 +4,7 @@
     <div nz-col class="gutter-row" [nzSpan]="24">
         <h1>Event list 📅</h1>
         <div class="btn_action">
-            <button nz-button nzType="primary" (click)="showModalMiddleCreateEvent()"><span nz-icon nzType="plus"
+            <button nz-button nzType="primary" (click)="showModalMiddleCreateEvent()" [disabled]="!(currentUser.isAdmin)"><span nz-icon nzType="plus"
                     nzTheme="outline"></span>Add event</button>
             <nz-modal [(nzVisible)]="isVisibleCreateEvent" nzTitle="New event" nzCentered
                 (nzOnCancel)="handleCancelMiddleCreateEvent()" (nzOnOk)="submitForm();">
@@ -56,9 +56,9 @@
                                     nzTheme="outline"></span>Join event</button>
                             <!-- <nz-divider nzType="vertical"></nz-divider> -->
                             <button nz-button nzType="primary" nzDanger nz-popconfirm
-                                nzPopconfirmTitle="Are you sure delete this event ?" nzPopconfirmPlacement="bottom"
+                                nzPopconfirmTitle="Are you sure to delete this event ?" nzPopconfirmPlacement="bottom"
                                 (nzOnConfirm)="confirmDelete(item['id'])" (nzOnCancel)="cancelDelete()"
-                                [disabled]="item['isPast'] || !(currentUser.isAdmin)">
+                                [disabled]="!(currentUser.isAdmin)">
                                 Delete<span nz-icon nzType="delete" nzTheme="outline"></span>
                             </button>
                         </div>

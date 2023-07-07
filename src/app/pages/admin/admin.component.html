@@ -21,7 +21,8 @@
                             </ng-template>
                         </div>
                         <nz-table #basicTable [nzData]="filteredUsers" nzShowPagination [nzPageSize]="7"
-                            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" (nzPageIndexChange)="refreshUsers()">
+                            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+                            (nzPageIndexChange)="refreshUsers()">
                             <thead>
                                 <tr>
                                     <th><span nz-icon nzType="user" nzTheme="outline"></span></th>
@@ -43,9 +44,11 @@
                                                 nzType="close"></span></ng-template>
                                     </td>
                                     <td>
-                                        <button nzDanger nz-button nzType="primary" nzShape="round"
-                                        (click)="handleRemoveUser(user['id'])">Delete<span nz-icon
-                                                nzType="delete" nzTheme="outline"></span></button>
+                                        <button nzDanger nz-button nzType="primary" nzShape="round" nz-popconfirm
+                                            nzPopconfirmTitle="Are you sure to delete this user ?"
+                                            nzPopconfirmPlacement="bottom" (nzOnConfirm)="confirmDelete(user['id'])"
+                                            (nzOnCancel)="cancelDelete()">Delete<span nz-icon nzType="delete"
+                                                nzTheme="outline"></span></button>
                                     </td>
                                 </tr>
                             </tbody>
