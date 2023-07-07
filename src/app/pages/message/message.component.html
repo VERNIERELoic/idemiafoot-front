@@ -20,7 +20,7 @@
                             nzDescription="{{ currentUser.username === item.user.username ? ('me at ' + (item.createdAt | date: 'shortTime')) : (item.user.username + ' at ' + (item.createdAt | date: 'shortTime')) }}">
                             <nz-list-item-meta-title>
                                 <div *ngIf="item.user.username != currentUser.username">
-                                    <nz-avatar *ngIf="item.user.avatar; else textAvatar" [nzSrc]="'http://' + item.user.avatar"
+                                    <nz-avatar *ngIf="item.user.avatar; else textAvatar" [nzSrc]="item.user.avatar"
                                         nzSize="small" style="vertical-align: middle;"></nz-avatar>
                                     <ng-template #textAvatar>
                                         <nz-avatar [ngStyle]="{ 'background-color': color }" [nzText]="item.user.username"
@@ -31,7 +31,7 @@
                                 <div *ngIf="item.user.username == currentUser.username">
                                     <a>{{ item.text }} </a>
 
-                                        <nz-avatar *ngIf="currentUser.avatar; else textAvatar" [nzSrc]="'http://' + currentUser.avatar"
+                                        <nz-avatar *ngIf="currentUser.avatar; else textAvatar" [nzSrc]="currentUser.avatar"
                                         nzSize="small" style="vertical-align: middle;"></nz-avatar>
                                     <ng-template #textAvatar>
                                         <nz-avatar [nzText]="item.user.username"
