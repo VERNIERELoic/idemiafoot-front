@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { UsersService } from '../../core/services/users/users.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Data } from '@angular/router';
 
 
 @Component({
@@ -17,18 +18,21 @@ export class AdminComponent {
   options: string[] = [];
   filteredUsers: any[] = [];
   nzMessageService: any;
+  listOfCurrentPageData: readonly Data[] = [];
+  pageSize: number | undefined;
 
   constructor(private usersService: UsersService, private notificationService: NzNotificationService) {
-
   };
 
-  ngOnInit(): void {
-    this.usersService.findAll().subscribe((users: any[]) => {
+  async ngOnInit(): Promise<void> {
+    try {
+      const users = await firstValueFrom(this.usersService.findAll()) as any[];
       this.users = users;
       this.filteredUsers = users;
-    });
+    } catch (err) {
+      console.error(err);
+    }
   }
-
 
   async checkSelectedUser(user: any) {
     var admin: any = await firstValueFrom(this.usersService.getUserById(user.id));
@@ -44,13 +48,18 @@ export class AdminComponent {
     this.filteredUsers = value ?
       this.users.filter(user => user.username.startsWith(value)) :
       this.users;
-
+  
     this.options = this.filteredUsers.map(user => user.username);
+  
+    // Reset listOfCurrentPageData
+    this.listOfCurrentPageData = this.filteredUsers.slice(0, this.pageSize);
   }
 
   async refreshUsers(){
     this.users = await firstValueFrom(this.usersService.findAll());
+    this.filteredUsers = this.users;
   }
+  
 
   async removeUser(id: any) {
     await firstValueFrom(this.usersService.removeUser(id))
@@ -62,13 +71,35 @@ export class AdminComponent {
       });
   }
 
-
+  async handleRemoveUser(id: any) {
+    try {
+      await this.removeUser(id);
+      await this.refreshUsers();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   async switchAdmin(adminValue: any, userId: any) {
     if (adminValue) {
       await firstValueFrom(this.usersService.addAdmin(userId));
     } else {
       await firstValueFrom(this.usersService.removeAdmin(userId));
     }
+    await this.refreshUsers();
+  }
+
+  onCurrentPageDataChange(listOfCurrentPageData: readonly Data[]): void {
+    this.listOfCurrentPageData = listOfCurrentPageData;
+  }
+
+  cancelDelete(): void {
+    this.nzMessageService.info('Cancel');
+  }
+
+
+  async confirmDelete(id: any): Promise<void> {
+    this.handleRemoveUser(id);
   }
 
 }

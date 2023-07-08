@@ -17,6 +17,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzTagModule,
     NzSwitchModule,
     NzPaginationModule,
+    NzPopconfirmModule,
   ], 
   providers: [
     UsersService,

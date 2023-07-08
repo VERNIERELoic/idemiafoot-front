@@ -20,38 +20,39 @@
                                         nzType="search"></span></button>
                             </ng-template>
                         </div>
-                        <ul nz-list [nzDataSource]="users" nzBordered nzSize="large">
-                            <nz-table #basicTable [nzData]="users">
-                                <thead>
-                                    <tr>
-                                        <th><span nz-icon nzType="user" nzTheme="outline"></span></th>
-                                        <th><span nz-icon nzType="mail" nzTheme="outline"></span></th>
-                                        <th>Admin</th>
-                                        <th><span nz-icon nzType="tool" nzTheme="outline"></span></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let user of filteredUsers">
-                                        <td>{{ user.username }}</td>
-                                        <td>{{ user.email }}</td>
-                                        <td>
-                                            <nz-switch [ngModel]="user.isAdmin" [nzCheckedChildren]="checkedTemplate"
-                                                [nzUnCheckedChildren]="unCheckedTemplate"
-                                                (ngModelChange)="switchAdmin($event, user.id)"></nz-switch>
-                                            <ng-template #checkedTemplate><span nz-icon
-                                                    nzType="check"></span></ng-template>
-                                            <ng-template #unCheckedTemplate><span nz-icon
-                                                    nzType="close"></span></ng-template>
-                                        </td>
-                                        <td>
-                                            <button nzDanger nz-button nzType="primary" nzShape="round"
-                                                (click)="removeUser(user.id);refreshUsers()">Delete<span nz-icon nzType="delete"
-                                                    nzTheme="outline"></span></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </nz-table>
-                        </ul>
+                        <nz-table #basicTable [nzData]="filteredUsers" nzShowPagination [nzPageSize]="7"
+                            (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+                            (nzPageIndexChange)="refreshUsers()">
+                            <thead>
+                                <tr>
+                                    <th><span nz-icon nzType="user" nzTheme="outline"></span></th>
+                                    <th><span nz-icon nzType="mail" nzTheme="outline"></span></th>
+                                    <th>Admin</th>
+                                    <th><span nz-icon nzType="tool" nzTheme="outline"></span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of listOfCurrentPageData">
+                                    <td>{{ user['username'] }}</td>
+                                    <td>{{ user['email'] }}</td>
+                                    <td>
+                                        <nz-switch [ngModel]="user['isAdmin']" [nzCheckedChildren]="checkedTemplate"
+                                            [nzUnCheckedChildren]="unCheckedTemplate"
+                                            (ngModelChange)="switchAdmin($event, user['id'])"></nz-switch>
+                                        <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
+                                        <ng-template #unCheckedTemplate><span nz-icon
+                                                nzType="close"></span></ng-template>
+                                    </td>
+                                    <td>
+                                        <button nzDanger nz-button nzType="primary" nzShape="round" nz-popconfirm
+                                            nzPopconfirmTitle="Are you sure to delete this user ?"
+                                            nzPopconfirmPlacement="bottom" (nzOnConfirm)="confirmDelete(user['id'])"
+                                            (nzOnCancel)="cancelDelete()">Delete<span nz-icon nzType="delete"
+                                                nzTheme="outline"></span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </nz-table>
                     </div>
                 </nz-tab>
                 <nz-tab nzTitle="Others">Content of Tab Pane 3</nz-tab>
