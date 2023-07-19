@@ -26,7 +26,7 @@
                             <thead>
                                 <tr>
                                     <th><span nz-icon nzType="user" nzTheme="outline"></span></th>
-                                    <th><span nz-icon nzType="mail" nzTheme="outline"></span></th>
+                                    <th><span nz-icon nzType="phone" nzTheme="outline"></span></th>
                                     <th>Admin</th>
                                     <th><span nz-icon nzType="tool" nzTheme="outline"></span></th>
                                 </tr>
@@ -34,7 +34,7 @@
                             <tbody>
                                 <tr *ngFor="let user of listOfCurrentPageData">
                                     <td>{{ user['username'] }}</td>
-                                    <td>{{ user['email'] }}</td>
+                                    <td>{{ user['phone'] }}</td>
                                     <td>
                                         <nz-switch [ngModel]="user['isAdmin']" [nzCheckedChildren]="checkedTemplate"
                                             [nzUnCheckedChildren]="unCheckedTemplate"
