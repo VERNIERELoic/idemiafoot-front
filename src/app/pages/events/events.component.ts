@@ -95,8 +95,10 @@ export class EventsComponent {
     this.teams = [];
     this.teams = await firstValueFrom(this.eventsService.getTeamsByEvent(eventId));
     timer(5000);
-    this.checkTimetoConfirm(this.event.date);
+    this.event = await firstValueFrom(this.eventsService.getEvent(eventId));
+    this.checkTimetoConfirm(this.event.date); 
   }
+  
 
   // onTeamPlayers(index: any) {
   //   const teamId = this.teams[index.index].id;

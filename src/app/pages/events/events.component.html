@@ -52,7 +52,7 @@
                     <td>
                         <div class="btn_tab">
                             <button nz-button nzType="primary"
-                                (click)="onPlayers(item['id']);onTeams(item['id']);onFreePlayers();"
+                                (click)="onPlayers(item['id']);onTeams(item['id']);onFreePlayers()"
                                 [disabled]="item['isPast']" (click)="showModalMiddleManageTeams()"><span nz-icon
                                     nzType="vertical-align-bottom" nzTheme="outline"></span>Join event</button>
                             <button nz-button nzType="primary" nzDanger nz-popconfirm

@@ -47,7 +47,8 @@
             </div>
             <input type="text" nz-input placeholder="Write here" [(ngModel)]="message"
                 (keydown.enter)="sendMsg(message);" class="custom-input" />
-            <button nz-button nzType="primary" nzSearch nzShape="round"><span nz-icon nzType="send" nzTheme="outline"></span></button>
+            <button nz-button nzType="primary" nzSearch (onclick)="sendMsg(message)" nzShape="round"><span nz-icon nzType="send"
+                    nzTheme="outline"></span></button>
             <!-- <div class="lottie-animation mt-10">
                 <ng-lottie [options]="options" (animationCreated)="onAnimate($event)"></ng-lottie>
             </div> -->
