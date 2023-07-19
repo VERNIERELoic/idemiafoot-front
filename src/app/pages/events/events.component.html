@@ -68,7 +68,7 @@
                                 <form nz-form>
                                     <nz-form-item class="flex-container">
                                         <nz-divider nzText="Players management"></nz-divider>
-                                        <nz-table class="flex-item" #basicTable [nzScroll]="{ y: '250px' }">
+                                        <nz-table [nzShowPagination]="false" [nzData]="players" class="flex-item" #basicTable [nzScroll]="{ y: '250px' }">
                                             <thead>
                                                 <tr>
                                                     <th>Positions</th>
