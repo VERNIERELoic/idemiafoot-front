@@ -7,6 +7,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AdminGuard } from './core/guards/admin.guard';
 import { ForgotComponent } from './pages/forgot/forgot.component';
+import { ResetComponent } from './pages/reset/reset.component';
 
 const routes: Routes = [
   {
@@ -26,23 +27,24 @@ const routes: Routes = [
     component: ForgotComponent
   },
   {
+    path: 'reset',
+    component: ResetComponent
+  },
+  {
     path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
-
   {
     path: 'events',
     loadChildren: () => import('./pages/events/events.module').then(m => m.EventsModule),
     canActivate: [AuthGuard]
   },
-
   {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
     canActivate: [AuthGuard, AdminGuard]
   },
-
   {
     path: 'message',
     loadChildren: () => import('./pages/message/message.module').then(m => m.MessageModule),

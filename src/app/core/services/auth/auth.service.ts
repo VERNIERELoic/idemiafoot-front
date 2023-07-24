@@ -64,6 +64,16 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  forgot(email: any): any {
+    const body = { email };
+    return this.http.post(`${environment.apiUrl}/auth/forgot`, body);
+  }
+
+  reset(password: any, token: any): any {
+    const body = { token, password};
+    return this.http.post(`${environment.apiUrl}/auth/reset`, body);
+  }
+
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
   }

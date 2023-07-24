@@ -1,6 +1,7 @@
 <p>Registred email</p>
 <div class="group">
-    <input type="text" nz-input formControlName="email" placeholder="Email" />
-    <button [routerLink]="['/home']" routerLinkActive="router-link-active" nz-button nzShape="round"
-        nzType="primary">Reset</button>
+    <form [formGroup]="form" (ngSubmit)="forgot()">
+        <input type="text" nz-input formControlName="email" placeholder="Email" />
+        <button nz-button nzShape="round" nzType="primary" type="submit">Reset</button>
+    </form>
 </div>

@@ -35,6 +35,7 @@ import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 
 import { LottieModule } from 'ngx-lottie';
 import { ForgotComponent } from './pages/forgot/forgot.component';
+import { ResetComponent } from './pages/reset/reset.component';
 export function playerFactory(): any {  
   return import('lottie-web');
 }
@@ -51,6 +52,7 @@ registerLocaleData(en);
     RegisterComponent,
     ProfileComponent,
     ForgotComponent,
+    ResetComponent,
 
   ],
   imports: [
