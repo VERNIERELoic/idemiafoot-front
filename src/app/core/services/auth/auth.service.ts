@@ -69,8 +69,8 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/auth/forgot`, body);
   }
 
-  reset(password: any, token: any): any {
-    const body = { token, password};
+  reset(token: any, password: any): any {
+    const body = {token, password};
     return this.http.post(`${environment.apiUrl}/auth/reset`, body);
   }
 

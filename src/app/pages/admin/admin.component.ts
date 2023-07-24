@@ -20,6 +20,8 @@ export class AdminComponent {
   nzMessageService: any;
   listOfCurrentPageData: readonly Data[] = [];
   pageSize: number | undefined;
+  inputValueMail: string | null = null;
+  textValue: string | null = null;
 
   constructor(private usersService: UsersService, private notificationService: NzNotificationService) {
   };
@@ -100,6 +102,10 @@ export class AdminComponent {
 
   async confirmDelete(id: any): Promise<void> {
     this.handleRemoveUser(id);
+  }
+
+  sendMail(){
+    
   }
 
 }

@@ -4,9 +4,13 @@
     </div>
     <div nz-col class="gutter-row" [nzSpan]="24">
         <div class="inner-box">
-            <h1 class="title">Administration 🔐</h1>
-            <nz-tabset class="menu-admin">
-                <nz-tab nzTitle="Users">
+            <h1>Administration 🔐</h1>
+            <nz-tabset class="admin">
+                <nz-tab [nzTitle]="userstp">
+                    <ng-template #userstp>
+                      <span nz-icon nzType="usergroup-add" nzTheme="outline"></span>
+                      Users
+                    </ng-template>
                     <div class="search">
                         <div class="bar">
                             <h3>Search for user</h3>
@@ -55,7 +59,32 @@
                         </nz-table>
                     </div>
                 </nz-tab>
-                <nz-tab nzTitle="Others">Content of Tab Pane 3</nz-tab>
+                <nz-tab [nzTitle]="messagetp">
+                    <ng-template #messagetp>
+                        <span nz-icon nzType="message" nzTheme="outline"></span>
+                      Communication
+                    </ng-template>
+                    <h3>Send communication email</h3>
+                    <nz-input-group [nzSuffix]="inputClearTpl">
+                        <input type="text" nz-input [(ngModel)]="inputValue" placeholder="Subject" />
+                    </nz-input-group>
+                    <ng-template #inputClearTpl>
+                        <span nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle"
+                            *ngIf="inputValueMail" (click)="inputValueMail = null"></span>
+                    </ng-template>
+                    <br />
+                    <br />
+                    <nz-input-group [nzSuffix]="textAreaClearTpl"
+                        class="ant-input-affix-wrapper-textarea-with-clear-btn">
+                        <textarea nz-input [(ngModel)]="textValue" placeholder="Message core"></textarea>
+                    </nz-input-group>
+                    <ng-template #textAreaClearTpl>
+                        <span nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle"
+                            *ngIf="textValue" (click)="textValue = null"></span>
+                    </ng-template>
+                    <button class="btn-send" nz-button nzType="primary" nzSearch (onclick)="sendMail()" nzShape="round">Send<span
+                            nz-icon nzType="send" nzTheme="outline"></span></button>
+                </nz-tab>
             </nz-tabset>
         </div>
     </div>

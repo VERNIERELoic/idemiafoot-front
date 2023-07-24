@@ -1,0 +1,18 @@
+.btn-send {
+    margin-top: 10px;
+    float: right;
+}
+
+.ant-input-affix-wrapper-textarea-with-clear-btn {
+    height: 200px;
+}
+
+.admin {
+    width: 500px;
+}
+
+@media (max-width: 600px) {
+    .admin {
+        width: auto;
+    }
+  }
