@@ -98,20 +98,6 @@ export class EventsComponent {
     this.event = await firstValueFrom(this.eventsService.getEvent(eventId));
     this.checkTimetoConfirm(this.event.date); 
   }
-  
-
-  // onTeamPlayers(index: any) {
-  //   const teamId = this.teams[index.index].id;
-  //   this.eventsService.getUsersByTeam(teamId).subscribe(((res: any) => {
-  //     this.teamPlayers = res.map((resPlayer: { username: any; }) => {
-  //       // this.freePlayers = this.players.filter((player: any) => {
-  //       //   return !this.teamPlayers.includes(player);
-  //       // });
-  //       return this.players.find((player: { username: any; }) => player.username === resPlayer.username);
-  //     });
-  //     console.log("team players", this.teamPlayers);
-  //   }));
-  // }
 
   async onTeamPlayers(index: any) {
     const teamId = this.teams[index.index].id;
