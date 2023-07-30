@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
       .then(() => {
         this.router.navigate(['']);
         this.notificationService.success("Success", "Connected");
-      }).catch(() => {
-        this.notificationService.error("Error", "Logins are not recognized !");
+      }).catch((error) => {
+        this.notificationService.error("Error", error.message);
       });
   }
 
