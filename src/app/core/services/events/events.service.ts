@@ -51,7 +51,7 @@ export class EventsService {
 
   createTeam(eventId: any): any {
     const body = { eventId };
-    return this.http.post(`${environment.apiUrl}/teams/create`, body);
+    return this.http.post(`${environment.apiUrl}/events-teams/create`, body);
   }
 
   deleteTeam(teamId: any): any {
@@ -60,17 +60,17 @@ export class EventsService {
   }
 
   getTeamsByEvent(eventId: any): any {
-    return this.http.get(`${environment.apiUrl}/teams/getTeamsByEvent/${eventId}`);
+    return this.http.get(`${environment.apiUrl}/events-teams/getTeamsByEvent/${eventId}`);
   }
 
   getFreePlayers(eventId: any): any {
     const body = { eventId };
-    return this.http.post(`${environment.apiUrl}/teams/getFreePlayers`, body);
+    return this.http.post(`${environment.apiUrl}/events-teams/getFreePlayers`, body);
   }
   
   addPlayerToTeam(userIds: number[], teamId: any): any {
     const body = { teamId, userIds };
-    return this.http.post(`${environment.apiUrl}/teams/addUserToTeam`, body);
+    return this.http.post(`${environment.apiUrl}/teams-users/addUserToTeam`, body);
   }
 
   getUsersByTeam(teamId: any): any {

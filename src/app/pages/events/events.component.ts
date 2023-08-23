@@ -129,7 +129,7 @@ export class EventsComponent {
         this.onPlayers(eventId);
       }).catch((error) => {
         console.error(error);
-        this.notificationService.error("Error", error.message);
+        this.notificationService.error("Error", error);
       });
   }
 
