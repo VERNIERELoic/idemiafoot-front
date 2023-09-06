@@ -8,8 +8,7 @@
             <nz-tabset class="admin">
                 <nz-tab [nzTitle]="userstp">
                     <ng-template #userstp>
-                      <span nz-icon nzType="usergroup-add" nzTheme="outline"></span>
-                      Users
+                      <span nz-icon nzType="usergroup-add" nzTheme="outline"></span>Users
                     </ng-template>
                     <div class="search">
                         <div class="bar">
@@ -61,8 +60,7 @@
                 </nz-tab>
                 <nz-tab [nzTitle]="messagetp">
                     <ng-template #messagetp>
-                        <span nz-icon nzType="message" nzTheme="outline"></span>
-                      Communication
+                        <span nz-icon nzType="message" nzTheme="outline"></span>Communication
                     </ng-template>
                     <h3>Send communication email</h3>
                     <nz-input-group [nzSuffix]="inputClearTpl">
@@ -84,6 +82,11 @@
                     </ng-template>
                     <button class="btn-send" nz-button nzType="primary" nzSearch (onclick)="sendMail()" nzShape="round">Send<span
                             nz-icon nzType="send" nzTheme="outline"></span></button>
+                </nz-tab>
+                <nz-tab [nzTitle]="serverhealth">
+                    <ng-template #serverhealth>
+                        <span nz-icon nzType="heart" nzTheme="outline"></span> Server health
+                    </ng-template>
                 </nz-tab>
             </nz-tabset>
         </div>
